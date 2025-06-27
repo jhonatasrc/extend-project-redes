@@ -24,41 +24,42 @@ header {
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
     display: flex;
-    flex-direction: column; /* Padrão para mobile: itens empilhados */
-    align-items: center; /* Alinha itens (h1 e nav) ao centro horizontalmente */
-    justify-content: space-between;
-    /* Remover text-align aqui, o flexbox com align-items: center já deve centralizar os filhos diretos */
+    flex-direction: column; /* **Padrão para mobile: h1 e nav empilhados** */
+    align-items: center; /* **Centraliza h1 e nav horizontalmente** */
+    justify-content: center; /* Centraliza verticalmente se houver espaço */
 }
 
 header .container {
     display: flex;
-    flex-direction: column; /* Padrão para mobile: itens empilhados */
-    align-items: center; /* Alinha os itens do container (h1 e nav) */
+    flex-direction: column; /* **Padrão para mobile: h1 e nav dentro do container empilhados** */
+    align-items: center; /* **Centraliza h1 e nav dentro do container** */
     width: 100%;
 }
 
 header h1 {
     font-size: 1.75rem; /* Ajustado para telas menores como base */
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: 1rem; /* Espaço abaixo do título para o menu */
     word-break: break-word;
-    text-align: center; /* **Mantido: Garante que o H1 esteja centralizado em mobile** */
-    hyphens: auto; /* Permite hifenização para quebrar palavras longas */
+    text-align: center; /* Garante que o H1 esteja centralizado */
+    hyphens: auto;
 }
 
 header nav ul {
     display: flex;
-    flex-direction: column; /* Itens da navegação empilhados em mobile */
+    flex-direction: row; /* **Menu na mesma linha em mobile** */
+    flex-wrap: wrap; /* Permite que os itens quebrem linha se a tela for muito pequena */
     list-style: none;
     padding: 0;
     margin: 0;
-    gap: 0.75rem;
-    width: 100%;
+    gap: 0.75rem; /* Espaçamento entre os itens do menu */
+    justify-content: center; /* **Centraliza os itens do menu na linha** */
+    width: 100%; /* Ocupa a largura total para centralização */
 }
 
 header nav li {
-    width: 100%;
-    text-align: center; /* Centraliza o texto de cada item da navegação */
+    /* Remover width: 100%; para que os itens se ajustem ao conteúdo */
+    /* Remover text-align: center; pois o justify-content já fará isso */
 }
 
 header nav a {
@@ -66,18 +67,21 @@ header nav a {
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
-    display: block; /* Ocupa todo o espaço do li para facilitar o clique */
-    padding: 0.5rem 0;
+    padding: 0.5rem 0.8rem; /* **Adicionado padding horizontal para visual de botão mais agradável** */
+    border-radius: 9999px; /* Mantém o estilo arredondado */
+    border: 1px solid transparent; /* Adiciona uma borda transparente para manter o visual no hover */
+    white-space: nowrap; /* Evita que o texto do link quebre em várias linhas */
 }
 
 header nav a:hover {
     color: #4ECDC4;
+    border-color: #4ECDC4; /* Borda no hover para destaque */
 }
 
 /* Seção de Herói */
 .hero-section {
     background-color: #f9fafb;
-    padding: 3rem 1rem; /* Reduzido para mobile */
+    padding: 3rem 1rem;
     text-align: center;
     border-radius: 0.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -85,24 +89,24 @@ header nav a:hover {
 }
 
 .hero-section h2 {
-    font-size: 2rem; /* Ajustado para telas menores como base */
+    font-size: 2rem;
     font-weight: 800;
     color: #00BD9E;
     margin-bottom: 1rem;
     line-height: 1.2;
-    word-break: break-word; /* Garante quebras de palavra em títulos longos */
-    hyphens: auto; /* Permite hifenização */
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .hero-section p {
-    font-size: 1rem; /* Ajustado para telas menores como base */
+    font-size: 1rem;
     color: #4b5563;
     margin-bottom: 1.5rem;
     max-width: 48rem;
     margin-left: auto;
     margin-right: auto;
     word-break: break-word;
-    hyphens: auto; /* Permite hifenização */
+    hyphens: auto;
 }
 
 .hero-section .button {
@@ -334,25 +338,29 @@ footer .social-links a:hover {
 /* Ajustes para telas de smartphone em modo retrato (largura máxima de 420px) */
 @media (max-width: 420px) {
     .container {
-        padding: 0 0.4rem; /* Reduz ainda mais o padding para telas muito pequenas */
+        padding: 0 0.4rem;
     }
 
     header h1 {
-        font-size: 1.25rem; /* **Ainda mais reduzido para telas super pequenas** */
+        font-size: 1.25rem;
+    }
+
+    header nav ul {
+        gap: 0.5rem; /* Espaçamento menor entre itens em telas muito pequenas */
     }
 
     header nav a {
         font-size: 0.85rem;
-        padding: 0.3rem 0;
+        padding: 0.3rem 0.6rem; /* Padding menor para os links */
     }
 
     .hero-section {
-        padding: 1.5rem 0.5rem; /* Reduz padding da seção herói */
-        margin: 0.5rem; /* Reduz margem */
+        padding: 1.5rem 0.5rem;
+        margin: 0.5rem;
     }
 
     .hero-section h2 {
-        font-size: 1.4rem; /* **Ainda mais reduzido para evitar overflow** */
+        font-size: 1.4rem;
         margin-bottom: 0.6rem;
     }
 
@@ -460,9 +468,13 @@ footer .social-links a:hover {
         font-size: 1.5rem;
     }
 
+    header nav ul {
+        gap: 0.75rem;
+    }
+
     header nav a {
         font-size: 0.9rem;
-        padding: 0.4rem 0;
+        padding: 0.5rem 0.8rem;
     }
 
     .hero-section {
@@ -564,31 +576,37 @@ footer .social-links a:hover {
 
 @media (min-width: 768px) { /* Tablets e desktops */
     header {
-        flex-direction: row;
-        /* Remove text-align aqui se ele foi usado para centralizar filhos diretos */
+        flex-direction: column; /* **Mantém empilhado em desktop também** */
+        align-items: center; /* **Centraliza h1 e nav horizontalmente** */
+        justify-content: center;
     }
 
     header .container {
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column; /* **Mantém empilhado em desktop também** */
+        justify-content: center;
         align-items: center;
     }
 
     header h1 {
         font-size: 2.25rem;
-        margin-bottom: 0;
-        text-align: left;
+        margin-bottom: 1rem; /* Espaço abaixo do título para o menu */
+        text-align: center; /* Garante centralização em desktop também */
     }
 
     header nav ul {
-        flex-direction: row;
+        flex-direction: row; /* **Menu na mesma linha em desktop** */
+        justify-content: center; /* **Centraliza os itens do menu** */
         gap: 1.5rem;
-        width: auto;
+        width: auto; /* Permite que a lista se ajuste ao conteúdo */
     }
 
     header nav li {
-        width: auto;
-        text-align: left;
+        /* Não precisa de width: auto; ou text-align: left; aqui, pois o flexbox do ul já controla */
+    }
+
+    header nav a {
+        padding: 0.75rem 1.2rem; /* Padding maior para links em desktop */
+        font-size: 1rem;
     }
 
     .hero-section {
@@ -641,7 +659,7 @@ footer .social-links a:hover {
 
     .card h4 {
         font-size: 1.5rem;
-        text-align: left;
+        text-align: center; /* Mantém centralizado em desktop também */
     }
 
     .card p {
