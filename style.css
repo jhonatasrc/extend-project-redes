@@ -27,7 +27,7 @@ header {
     flex-direction: column; /* Padrão para mobile: itens empilhados */
     align-items: center; /* Alinha itens (h1 e nav) ao centro horizontalmente */
     justify-content: space-between;
-    text-align: center; /* Garante que qualquer texto direto no header ou elementos filhos sem flexbox centralizem */
+    /* Remover text-align aqui, o flexbox com align-items: center já deve centralizar os filhos diretos */
 }
 
 header .container {
@@ -38,11 +38,12 @@ header .container {
 }
 
 header h1 {
-    font-size: 1.75rem; /* Ajustado para telas menores */
-    font-weight: 700; /* font-bold */
+    font-size: 1.75rem; /* Ajustado para telas menores como base */
+    font-weight: 700;
     margin-bottom: 1rem;
     word-break: break-word;
-    text-align: center; /* **Adicionado: Garante que o H1 esteja centralizado em mobile** */
+    text-align: center; /* **Mantido: Garante que o H1 esteja centralizado em mobile** */
+    hyphens: auto; /* Permite hifenização para quebrar palavras longas */
 }
 
 header nav ul {
@@ -51,26 +52,26 @@ header nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    gap: 0.75rem; /* Espaçamento menor entre os itens para mobile */
-    width: 100%; /* Ocupa a largura total para alinhar */
+    gap: 0.75rem;
+    width: 100%;
 }
 
 header nav li {
-    width: 100%; /* Garante que cada item ocupe a linha inteira */
+    width: 100%;
     text-align: center; /* Centraliza o texto de cada item da navegação */
 }
 
 header nav a {
     color: white;
     text-decoration: none;
-    font-weight: 600; /* font-semibold */
+    font-weight: 600;
     transition: color 0.3s ease;
     display: block; /* Ocupa todo o espaço do li para facilitar o clique */
-    padding: 0.5rem 0; /* Adiciona padding para facilitar o clique */
+    padding: 0.5rem 0;
 }
 
 header nav a:hover {
-    color: #4ECDC4; /* Teal mais claro para o hover */
+    color: #4ECDC4;
 }
 
 /* Seção de Herói */
@@ -84,21 +85,24 @@ header nav a:hover {
 }
 
 .hero-section h2 {
-    font-size: 2rem; /* Ajustado para telas menores */
+    font-size: 2rem; /* Ajustado para telas menores como base */
     font-weight: 800;
     color: #00BD9E;
     margin-bottom: 1rem;
     line-height: 1.2;
+    word-break: break-word; /* Garante quebras de palavra em títulos longos */
+    hyphens: auto; /* Permite hifenização */
 }
 
 .hero-section p {
-    font-size: 1rem; /* Ajustado para telas menores */
+    font-size: 1rem; /* Ajustado para telas menores como base */
     color: #4b5563;
     margin-bottom: 1.5rem;
     max-width: 48rem;
     margin-left: auto;
     margin-right: auto;
     word-break: break-word;
+    hyphens: auto; /* Permite hifenização */
 }
 
 .hero-section .button {
@@ -106,12 +110,12 @@ header nav a:hover {
     background-color: #00BD9E;
     color: white;
     font-weight: 700;
-    padding: 0.6rem 1.5rem; /* Reduzido para mobile */
+    padding: 0.6rem 1.5rem;
     border-radius: 9999px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-decoration: none;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    font-size: 0.9rem; /* Ajustado para mobile */
+    font-size: 0.9rem;
 }
 
 .hero-section .button:hover {
@@ -128,42 +132,46 @@ main {
 
 main section {
     background-color: white;
-    padding: 1.5rem; /* Reduzido para mobile */
+    padding: 1.5rem;
     border-radius: 0.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 1.5rem;
 }
 
 main section h3 {
-    font-size: 1.75rem; /* Ajustado para mobile */
+    font-size: 1.75rem;
     font-weight: 700;
     color: #00BD9E;
     margin-bottom: 1rem;
-    text-align: center; /* Garante centralização dos títulos de seção */
+    text-align: center;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 main section p {
-    font-size: 1rem; /* Ajustado para mobile */
+    font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 1rem;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 /* Grid de Cartões */
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr; /* Padrão para mobile: 1 coluna */
-    gap: 1.5rem; /* Reduzido para mobile */
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
 }
 
 /* Cartões de Conteúdo */
 .card {
-    padding: 1.25rem; /* Reduzido para mobile */
+    padding: 1.25rem;
     border-radius: 0.5rem;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     border: 1px solid;
 }
 
-/* Cores dos Cartões (mantidas) */
+/* Cores dos Cartões */
 .card.blue-theme {
     background-color: #ECFDF5;
     border-color: #A7F3D0;
@@ -180,21 +188,25 @@ main section p {
 }
 
 .card h4 {
-    font-size: 1.25rem; /* Ajustado para mobile */
+    font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
-    text-align: center; /* Centraliza o título do card */
+    text-align: center;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .card p {
     color: #4b5563;
-    font-size: 0.95rem; /* Ajustado para o texto do cartão em mobile */
+    font-size: 0.95rem;
     margin-bottom: 0;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .card ul {
     list-style: disc;
-    padding-left: 1rem; /* Reduzido para mobile */
+    padding-left: 1rem;
     margin-top: 0.5rem;
 }
 
@@ -216,16 +228,16 @@ main section p {
 footer {
     background-color: #1A2B2D;
     color: white;
-    padding: 1rem 1.5rem; /* Reduzido para mobile */
+    padding: 1rem 1.5rem;
     margin-top: 1.5rem;
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
-    text-align: center; /* Centraliza todo o conteúdo do rodapé */
+    text-align: center;
 }
 
 footer .social-links {
     display: flex;
-    flex-direction: column; /* Empilha links sociais em mobile */
+    flex-direction: column;
     justify-content: center;
     gap: 0.75rem;
     margin-top: 0.75rem;
@@ -235,7 +247,7 @@ footer .social-links a {
     color: white;
     text-decoration: none;
     transition: color 0.3s ease;
-    display: block; /* Garante que o link ocupe a linha para facilitar o clique */
+    display: block;
 }
 
 footer .social-links a:hover {
@@ -245,7 +257,7 @@ footer .social-links a:hover {
 /* Formulário de Contato */
 .contact-form {
     background-color: #ffffff;
-    padding: 1.5rem; /* Reduzido para mobile */
+    padding: 1.5rem;
     border-radius: 0.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 600px;
@@ -253,16 +265,20 @@ footer .social-links a:hover {
 }
 
 .contact-form h3 {
-    font-size: 1.75rem; /* Ajustado para mobile */
+    font-size: 1.75rem;
     color: #1A2B2D;
     margin-bottom: 1rem;
-    text-align: center; /* Garante centralização do título do formulário */
+    text-align: center;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .contact-form p {
-    font-size: 0.9rem; /* Ajustado para mobile */
+    font-size: 0.9rem;
     margin-bottom: 1rem;
-    text-align: center; /* Centraliza o parágrafo de instrução */
+    text-align: center;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .form-group {
@@ -274,7 +290,7 @@ footer .social-links a:hover {
     margin-bottom: 0.4rem;
     font-weight: 600;
     color: #333;
-    font-size: 0.9rem; /* Ajustado para mobile */
+    font-size: 0.9rem;
 }
 
 .form-group input[type="text"],
@@ -315,8 +331,127 @@ footer .social-links a:hover {
 
 /* Media Queries para Responsividade */
 
-/* Pequenas telas (até 576px) */
-@media (max-width: 576px) {
+/* Ajustes para telas de smartphone em modo retrato (largura máxima de 420px) */
+@media (max-width: 420px) {
+    .container {
+        padding: 0 0.4rem; /* Reduz ainda mais o padding para telas muito pequenas */
+    }
+
+    header h1 {
+        font-size: 1.25rem; /* **Ainda mais reduzido para telas super pequenas** */
+    }
+
+    header nav a {
+        font-size: 0.85rem;
+        padding: 0.3rem 0;
+    }
+
+    .hero-section {
+        padding: 1.5rem 0.5rem; /* Reduz padding da seção herói */
+        margin: 0.5rem; /* Reduz margem */
+    }
+
+    .hero-section h2 {
+        font-size: 1.4rem; /* **Ainda mais reduzido para evitar overflow** */
+        margin-bottom: 0.6rem;
+    }
+
+    .hero-section p {
+        font-size: 0.85rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .hero-section .button {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.75rem;
+    }
+
+    main {
+        padding: 0 0.5rem;
+        margin-top: 0.8rem;
+        margin-bottom: 0.8rem;
+    }
+
+    main section {
+        padding: 0.8rem;
+        margin-bottom: 0.8rem;
+    }
+
+    main section h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.6rem;
+    }
+
+    main section p {
+        font-size: 0.85rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .card {
+        padding: 0.9rem;
+    }
+
+    .card h4 {
+        font-size: 1rem;
+    }
+
+    .card p {
+        font-size: 0.8rem;
+    }
+
+    .card ul {
+        padding-left: 0.7rem;
+    }
+
+    footer {
+        padding: 0.7rem 0.8rem;
+        margin-top: 0.8rem;
+    }
+
+    footer .social-links {
+        gap: 0.4rem;
+        margin-top: 0.4rem;
+    }
+
+    .contact-form {
+        padding: 0.8rem;
+        margin: 0.8rem auto;
+    }
+
+    .contact-form h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .contact-form p {
+        font-size: 0.8rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .form-group label {
+        font-size: 0.75rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group textarea {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .form-group textarea {
+        min-height: 50px;
+    }
+
+    .contact-form .submit-button {
+        padding: 0.6rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* Telas de smartphone comuns (421px a 767px) */
+@media (min-width: 421px) and (max-width: 767px) {
     .container {
         padding: 0 0.75rem;
     }
@@ -325,33 +460,85 @@ footer .social-links a:hover {
         font-size: 1.5rem;
     }
 
+    header nav a {
+        font-size: 0.9rem;
+        padding: 0.4rem 0;
+    }
+
+    .hero-section {
+        padding: 2.5rem 1rem;
+        margin: 1rem;
+    }
+
     .hero-section h2 {
-        font-size: 1.75rem;
+        font-size: 1.8rem;
     }
 
     .hero-section p {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
     }
 
     .hero-section .button {
         padding: 0.5rem 1.2rem;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    main {
+        padding: 0 1rem;
+        margin-top: 1.25rem;
+        margin-bottom: 1.25rem;
+    }
+
+    main section {
+        padding: 1.25rem;
+        margin-bottom: 1.25rem;
     }
 
     main section h3 {
         font-size: 1.5rem;
     }
 
+    main section p {
+        font-size: 0.95rem;
+    }
+
+    .card {
+        padding: 1.1rem;
+    }
+
     .card h4 {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
     }
 
     .card p {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
+    }
+
+    .card ul {
+        padding-left: 0.9rem;
+    }
+
+    footer {
+        padding: 0.9rem 1.2rem;
+        margin-top: 1.25rem;
+    }
+
+    footer .social-links {
+        gap: 0.6rem;
+        margin-top: 0.6rem;
+    }
+
+    .contact-form {
+        padding: 1.25rem;
+        margin: 1.25rem auto;
     }
 
     .contact-form h3 {
         font-size: 1.5rem;
+    }
+
+    .contact-form p {
+        font-size: 0.88rem;
     }
 
     .form-group label {
@@ -361,21 +548,24 @@ footer .social-links a:hover {
     .form-group input[type="text"],
     .form-group input[type="email"],
     .form-group textarea {
-        font-size: 0.85rem;
-        padding: 0.6rem;
+        padding: 0.65rem;
+        font-size: 0.9rem;
+    }
+
+    .form-group textarea {
+        min-height: 70px;
     }
 
     .contact-form .submit-button {
-        font-size: 0.9rem;
-        padding: 0.7rem;
+        padding: 0.75rem;
+        font-size: 0.95rem;
     }
 }
-
 
 @media (min-width: 768px) { /* Tablets e desktops */
     header {
         flex-direction: row;
-        text-align: left; /* Volta o alinhamento para a esquerda em desktop se necessário para outros elementos */
+        /* Remove text-align aqui se ele foi usado para centralizar filhos diretos */
     }
 
     header .container {
@@ -387,7 +577,7 @@ footer .social-links a:hover {
     header h1 {
         font-size: 2.25rem;
         margin-bottom: 0;
-        text-align: left; /* O título alinha à esquerda em desktop */
+        text-align: left;
     }
 
     header nav ul {
@@ -398,7 +588,7 @@ footer .social-links a:hover {
 
     header nav li {
         width: auto;
-        text-align: left; /* Alinha o texto dos links de navegação à esquerda */
+        text-align: left;
     }
 
     .hero-section {
@@ -440,6 +630,7 @@ footer .social-links a:hover {
     }
 
     .grid-container {
+        display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
     }
@@ -450,7 +641,7 @@ footer .social-links a:hover {
 
     .card h4 {
         font-size: 1.5rem;
-        text-align: left; /* Volta o alinhamento para a esquerda em desktop */
+        text-align: left;
     }
 
     .card p {
