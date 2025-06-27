@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 6: Redes sem Fio e Redes Móveis</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="capitulos.css">
+    
+</head>
+<body>
+    
+    <header>
+        <div class="container">
+            <h1>Falando Sobre Redes de Computadores</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#inicio">Início</a></li>
+                    <li><a href="index.html#jornada">Nossa Jornada</a></li>
+                    <li><a href="index.html#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Botões de navegação no topo da página -->
+        <div class="chapter-navigation-buttons">
+            <a href="index.html" class="back-button">← Início</a>
+            <a href="capitulo5.html" class="back-button">← Capítulo Anterior</a>
+            <a href="capitulo7.html" class="back-button">Próximo Capítulo →</a>
+        </div>
+
+        <!-- Seção de Progresso dos Capítulos -->
+        <section class="chapter-progress">
+            <h3>Progresso da Jornada</h3>
+            <div class="progress-indicator">
+                <a href="capitulo1.html" class="chapter-dot completed" data-chapter="1">1</a>
+                <a href="capitulo2.html" class="chapter-dot completed" data-chapter="2">2</a>
+                <a href="capitulo3.html" class="chapter-dot completed" data-chapter="3">3</a>
+                <a href="capitulo4.html" class="chapter-dot completed" data-chapter="4">4</a>
+                <a href="capitulo5.html" class="chapter-dot completed" data-chapter="5">5</a>
+                <a href="capitulo6.html" class="chapter-dot completed current-chapter" data-chapter="6">6</a>
+                <a href="capitulo7.html" class="chapter-dot" data-chapter="7">7</a>
+                <a href="capitulo8.html" class="chapter-dot" data-chapter="8">8</a>
+                <a href="capitulo9.html" class="chapter-dot" data-chapter="9">9</a>
+            </div>
+            <p>Capítulos concluídos: <span id="completed-count">6</span> de <span id="total-chapters">9</span></p>
+        </section>
+
+        <section id="capitulo-intro" class="chapter-section">
+            <h2>Redes sem Fio e Redes Móveis</h2>
+            <p>
+                Até agora, exploramos as redes com fio, onde cabos de cobre e fibras ópticas guiam os bits. Mas e a liberdade de se conectar em qualquer lugar? Bem-vindo ao mundo das <strong>Redes sem Fio e Redes Móveis</strong>! Este capítulo desvenda a magia por trás das conexões que nos permitem navegar na internet em cafeterias, usar nossos celulares em movimento e controlar dispositivos inteligentes em casa, tudo sem a necessidade de cabos.
+            </p>
+            <p>
+                As redes sem fio (wireless) trazem consigo desafios e características únicas que as distinguem das redes com fio. Problemas como a atenuação do sinal, a interferência e o "problema do terminal oculto" precisam ser superados. Além disso, a mobilidade dos dispositivos (como smartphones e laptops) adiciona uma camada extra de complexidade, exigindo mecanismos para manter a conexão enquanto o usuário se move.
+            </p>
+            <p>
+                Neste capítulo, vamos mergulhar nos princípios das comunicações sem fio, explorar os padrões Wi-Fi (IEEE 802.11) e entender como as redes celulares (3G/4G/5G) permitem a mobilidade em larga escala.
+            </p>
+        </section>
+
+        <section id="introducao-redes-sem-fio" class="chapter-section">
+            <h3>Introdução às Redes sem Fio</h3>
+            <p>
+                Uma rede sem fio interconecta nós (dispositivos) sem o uso de fios. A comunicação ocorre através do ar, usando ondas de rádio.
+            </p>
+            <ul>
+                <li>
+                    <h4>Características e Desafios:</h4>
+                    <p>
+                        As redes sem fio enfrentam desafios que as redes com fio geralmente não têm:
+                        <ul>
+                            <li><strong>Atenuação do Sinal:</strong> O sinal de rádio perde força rapidamente com a distância e é absorvido/refletido por objetos (paredes, pessoas).</li>
+                            <li><strong>Interferência:</strong> Outros sinais de rádio (de outros dispositivos, Wi-Fi vizinho, micro-ondas) podem interferir, corrompendo os dados.</li>
+                            <li><strong>Multi-caminho:</strong> O sinal pode refletir em superfícies, chegando ao receptor por múltiplos caminhos e em momentos diferentes, causando desvanecimento.</li>
+                            <li><strong>Problema do Terminal Oculto:</strong> Dois nós podem estar ao alcance de um ponto de acesso, mas não conseguem se ouvir mutuamente. Se eles transmitirem ao mesmo tempo, podem causar uma colisão no ponto de acesso sem perceber. Isso dificulta a detecção de colisões.</li>
+                            <li><strong>Largura de Banda Compartilhada:</strong> O meio de transmissão (o ar) é compartilhado, e todos os dispositivos na mesma área usam a mesma banda.</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <h4>Taxa de Dados e Distância:</h4>
+                    <p>
+                        Geralmente, quanto maior a distância entre o transmissor e o receptor, menor a taxa de dados que pode ser alcançada de forma confiável. Quanto mais "obstáculos" entre eles, pior o sinal.
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="redes-locais-sem-fio-wi-fi" class="chapter-section">
+            <h3>Redes Locais sem Fio: Wi-Fi (IEEE 802.11)</h3>
+            <p>
+                As redes locais sem fio, popularmente conhecidas como Wi-Fi, são baseadas no padrão <strong>IEEE 802.11</strong>. Elas permitem que dispositivos se conectem a uma rede sem a necessidade de cabos.
+            </p>
+            <ul>
+                <li>
+                    <h4>Arquitetura 802.11:</h4>
+                    <ul>
+                        <li>
+                            <strong>BSS (Basic Service Set - Conjunto de Serviço Básico):</strong> Um BSS é uma rede local sem fio com um ou mais dispositivos e um <strong>Ponto de Acesso (AP - Access Point)</strong>. O AP é como o "roteador Wi-Fi" que você tem em casa: ele conecta os dispositivos sem fio à rede com fio. Dispositivos se comunicam com o AP.
+                        </li>
+                        <li>
+                            <strong>Modo Ad Hoc (IBSS):</strong> Quando os dispositivos se comunicam diretamente entre si, sem um Ponto de Acesso. Usado para redes temporárias.
+                        </li>
+                        <li>
+                            <strong>Estações (STAs):</strong> São os dispositivos que se conectam à rede sem fio (laptops, smartphones, etc.).
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h4>Associação e Autenticação:</h4>
+                    <p>
+                        Antes de um dispositivo poder se comunicar via Wi-Fi, ele precisa passar por um processo de:
+                        <ul>
+                            <li><strong>Varredura (Scanning):</strong> O dispositivo procura por redes Wi-Fi disponíveis, enviando mensagens de "sonda" ou ouvindo por "balizas" (beacons) dos APs.</li>
+                            <li><strong>Associação:</strong> O dispositivo escolhe um AP e se associa a ele. Isso pode envolver troca de mensagens para sincronização.</li>
+                            <li><strong>Autenticação:</strong> O dispositivo se autentica com o AP, geralmente com uma senha (WPA2, WPA3) para garantir que apenas usuários autorizados acessem a rede.</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <h4>CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance):</h4>
+                    <p>
+                        Devido ao problema do terminal oculto e à dificuldade de detectar colisões em transmissões sem fio (não se pode ouvir o próprio sinal enquanto transmite), o 802.11 usa <strong>CSMA/CA</strong> para <strong>evitar</strong> colisões, em vez de detectá-las e recuperá-las.
+                        <ul>
+                            <li><strong>Sensoriamento de Portadora:</strong> Um nó "ouve" o canal antes de transmitir. Se estiver ocupado, espera.</li>
+                            <li><strong>Esperas Aleatórias:</strong> Se o canal estiver livre, o nó espera um tempo aleatório antes de transmitir. Isso ajuda a evitar que dois nós que ouviram o canal livre ao mesmo tempo transmitam simultaneamente.</li>
+                            <li><strong>ACKs Explícitos:</strong> Se o remetente não recebe um ACK (confirmação) do receptor em um certo tempo, ele assume que houve uma colisão (ou perda) e retransmite.</li>
+                            <li><strong>Mecanismo RTS/CTS (Request To Send / Clear To Send):</strong> Opcional, usado para resolver o problema do terminal oculto. O remetente envia um pequeno quadro RTS para o AP, pedindo para transmitir. O AP responde com um CTS, que "silencia" todos os outros nós na área (incluindo terminais ocultos) e autoriza o remetente a transmitir.</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <h4>Mobilidade no Nível da Camada de Enlace:</h4>
+                    <p>
+                        Quando um dispositivo se move entre diferentes APs dentro da mesma rede (ex: em um campus universitário), ele pode fazer um <strong>handover</strong> ou <strong>roaming</strong>. O novo AP notifica a rede com fio (via ARP) sobre a nova localização do dispositivo, e a rede atualiza suas tabelas de encaminhamento para direcionar os quadros para o novo AP.
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="redes-moveis" class="chapter-section">
+            <h3>Redes Móveis (Celulares): Conectividade em Movimento</h3>
+            <p>
+                As redes celulares permitem que dispositivos móveis (como smartphones) acessem a internet e façam chamadas de voz enquanto se movem por grandes áreas geográficas. Elas são organizadas em células, cada uma atendida por uma estação base.
+            </p>
+            <ul>
+                <li>
+                    <h4>Gerações da Rede Celular:</h4>
+                    <ul>
+                        <li><strong>1G (Anos 80):</strong> Analógica, apenas voz.</li>
+                        <li><strong>2G (Anos 90 - GSM, CDMA):</strong> Digital, voz e dados básicos (SMS).</li>
+                        <li><strong>3G (Início dos 2000 - UMTS, CDMA2000):</strong> Dados em pacote, acesso à Internet (até alguns Mbps).</li>
+                        <li><strong>4G (Final dos 2000 - LTE):</strong> Taxas de dados muito maiores (dezenas a centenas de Mbps), menor latência, IP-based (todo o tráfego é IP).</li>
+                        <li><strong>5G (2020s - Próxima Geração):</strong> Gigabits por segundo, latência ultrabaixa, suporte massivo a dispositivos IoT, segmentação de rede (network slicing).</li>
+                    </ul>
+                </li>
+                <li>
+                    <h4>Arquitetura da Rede Celular (Simplificada):</h4>
+                    <p>
+                        Uma rede celular tem dois componentes principais:
+                        <ul>
+                            <li><strong>Rede de Acesso de Rádio (RAN - Radio Access Network):</strong> Consiste nas estações base (torres de celular) que se comunicam com os dispositivos móveis.</li>
+                            <li><strong>Rede Core (Núcleo da Rede):</strong> Responsável pela autenticação, faturamento, gerenciamento da mobilidade e conexão com a Internet pública e outras redes.</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <h4>Gerenciamento da Mobilidade:</h4>
+                    <p>
+                        O maior desafio em redes móveis é garantir que o dispositivo continue conectado e acessível mesmo quando se move entre células. Isso envolve:
+                        <ul>
+                            <li><strong>Roteamento para o Dispositivo Móvel:</strong> Como os pacotes chegam ao dispositivo móvel, independentemente de sua localização.</li>
+                            <li><strong>Handover (Entregas):</strong> O processo de transferir a conexão de um dispositivo móvel de uma estação base para outra, à medida que ele se move. Isso deve ser feito de forma transparente ao usuário.</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <h4>Mobile IP (IP Móvel):</h4>
+                    <p>
+                        Um protocolo de camada de rede que permite a um dispositivo móvel manter seu endereço IP original e a conectividade IP enquanto se move entre diferentes redes. Isso é feito usando dois agentes:
+                        <ul>
+                            <li><strong>Home Agent (Agente Doméstico):</strong> Um roteador na rede "doméstica" do dispositivo móvel que armazena sua localização atual.</li>
+                            <li><strong>Foreign Agent (Agente Estrangeiro):</strong> Um roteador na rede "visitada" pelo dispositivo móvel que ajuda a registrar sua localização e a entregar pacotes.</li>
+                        </ul>
+                        Quando o dispositivo móvel se move, ele registra seu novo endereço (care-of address) com o Home Agent. Pacotes destinados ao dispositivo móvel são primeiro enviados ao Home Agent, que os "tunela" para o Foreign Agent, que por sua vez os entrega ao dispositivo móvel.
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="resumo-capitulo" class="chapter-section">
+            <h3>Resumo do Capítulo</h3>
+            <p>
+                Neste capítulo, exploramos o fascinante universo das <strong>Redes sem Fio e Redes Móveis</strong>. Começamos entendendo os desafios inerentes à comunicação sem fio, como atenuação e interferência, e o importante problema do terminal oculto.
+            </p>
+            <p>
+                Aprofundamos no padrão <strong>Wi-Fi (IEEE 802.11)</strong>, sua arquitetura, o processo de associação e o crucial protocolo <strong>CSMA/CA</strong>, que evita colisões em ambientes sem fio. Vimos também como a mobilidade é gerenciada no nível da camada de enlace em redes Wi-Fi.
+            </p>
+            <p>
+                Por fim, mergulhamos nas <strong>Redes Celulares</strong>, desde suas gerações (3G, 4G, 5G) até a sua arquitetura básica e os complexos mecanismos de <strong>gerenciamento da mobilidade</strong>, incluindo o conceito de **Mobile IP**.
+            </p>
+            <p>
+                A conectividade sem fio é a base da nossa sociedade moderna, e compreender seus princípios é essencial para qualquer um que deseje dominar as redes de computadores. No próximo capítulo, exploraremos as redes multimídia, um pilar da internet atual.
+            </p>
+        </section>
+
+        <section id="atividades" class="chapter-section">
+            <h3>Atividades de Aprendizagem</h3>
+            <p>Teste seus conhecimentos sobre o Capítulo 6 com as seguintes perguntas de múltipla escolha:</p>
+
+            <!-- Questão 1 -->
+            <div class="question-block">
+                <p>1. Qual dos seguintes problemas é um desafio comum em redes sem fio, onde dois nós podem estar ao alcance de um ponto de acesso, mas não conseguem se ouvir mutuamente?</p>
+                <label>
+                    <input type="radio" name="q1_ch6" value="a"> A) Atenuação do sinal
+                </label>
+                <label>
+                    <input type="radio" name="q1_ch6" value="b"> B) Interferência de multi-caminho
+                </label>
+                <label>
+                    <input type="radio" name="q1_ch6" value="c"> C) Problema do terminal oculto
+                </label>
+                <label>
+                    <input type="radio" name="q1_ch6" value="d"> D) Largura de banda compartilhada
+                </label>
+                <button class="check-button" onclick="checkAnswer('q1_ch6', 'c', 'feedback1_ch6')">Verificar Resposta</button>
+                <div class="feedback" id="feedback1_ch6"></div>
+            </div>
+
+            <!-- Questão 2 -->
+            <div class="question-block">
+                <p>2. Em redes Wi-Fi (IEEE 802.11), qual protocolo de acesso múltiplo é usado para **evitar** colisões, em vez de detectá-las e recuperá-las?</p>
+                <label>
+                    <input type="radio" name="q2_ch6" value="a"> A) CSMA/CD
+                </label>
+                <label>
+                    <input type="radio" name="q2_ch6" value="b"> B) TDMA
+                </label>
+                <label>
+                    <input type="radio" name="q2_ch6" value="c"> C) ALOHA Slotado
+                </label>
+                <label>
+                    <input type="radio" name="q2_ch6" value="d"> D) CSMA/CA
+                </label>
+                <button class="check-button" onclick="checkAnswer('q2_ch6', 'd', 'feedback2_ch6')">Verificar Resposta</button>
+                <div class="feedback" id="feedback2_ch6"></div>
+            </div>
+
+            <!-- Questão 3 -->
+            <div class="question-block">
+                <p>3. Qual é o nome do processo de transferir a conexão de um dispositivo móvel de uma estação base para outra, à medida que ele se move em uma rede celular?</p>
+                <label>
+                    <input type="radio" name="q3_ch6" value="a"> A) Roaming
+                </label>
+                <label>
+                    <input type="radio" name="q3_ch6" value="b"> B) Handover
+                </label>
+                <label>
+                    <input type="radio" name="q3_ch6" value="c"> C) Multiplexação
+                </label>
+                <label>
+                    <input type="radio" name="q3_ch6" value="d"> D) Autenticação
+                </label>
+                <button class="check-button" onclick="checkAnswer('q3_ch6', 'b', 'feedback3_ch6')">Verificar Resposta</button>
+                <div class="feedback" id="feedback3_ch6"></div>
+            </div>
+
+            <!-- Questão 4 -->
+            <div class="question-block">
+                <p>4. Em uma rede celular, qual componente é responsável pela autenticação, faturamento e gerenciamento da mobilidade, além de conectar com a Internet pública?</p>
+                <label>
+                    <input type="radio" name="q4_ch6" value="a"> A) Estação Base
+                </label>
+                <label>
+                    <input type="radio" name="q4_ch6" value="b"> B) Rede de Acesso de Rádio (RAN)
+                </label>
+                <label>
+                    <input type="radio" name="q4_ch6" value="c"> C) Dispositivo Móvel (STA)
+                </label>
+                <label>
+                    <input type="radio" name="q4_ch6" value="d"> D) Rede Core (Núcleo da Rede)
+                </label>
+                <button class="check-button" onclick="checkAnswer('q4_ch6', 'd', 'feedback4_ch6')">Verificar Resposta</button>
+                <div class="feedback" id="feedback4_ch6"></div>
+            </div>
+
+            <!-- Questão 5 -->
+            <div class="question-block">
+                <p>5. Qual protocolo de camada de rede permite a um dispositivo móvel manter seu endereço IP original e a conectividade IP enquanto se move entre diferentes redes, usando agentes domésticos e estrangeiros?</p>
+                <label>
+                    <input type="radio" name="q5_ch6" value="a"> A) Wi-Fi (802.11)
+                </label>
+                <label>
+                    <input type="radio" name="q5_ch6" value="b"> B) LTE (Long-Term Evolution)
+                </label>
+                <label>
+                    <input type="radio" name="q5_ch6" value="c"> C) Mobile IP
+                </label>
+                <label>
+                    <input type="radio" name="q5_ch6" value="d"> D) CSMA/CA
+                </label>
+                <button class="check-button" onclick="checkAnswer('q5_ch6', 'c', 'feedback5_ch6')">Verificar Resposta</button>
+                <div class="feedback" id="feedback5_ch6"></div>
+            </div>
+        </section>
+
+        <div class="chapter-navigation-buttons">
+            <a href="capitulo5.html" class="back-button">← Capítulo Anterior</a>
+            <a href="capitulo7.html" class="back-button">Próximo Capítulo →</a>
+        </div>
+    </main>
+
+    <!-- Rodapé do Site -->
+    <footer id="contato">
+        <div class="container">
+            <p>&copy; 2025 Desvendando as Redes. Todos os direitos reservados.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script para verificar as respostas -->
+    <script>
+        function checkAnswer(questionName, correctAnswer, feedbackId) {
+            const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+            const feedbackElement = document.getElementById(feedbackId);
+
+            if (selectedOption) {
+                if (selectedOption.value === correctAnswer) {
+                    feedbackElement.textContent = "Correto! 🎉";
+                    feedbackElement.className = "feedback correct";
+                } else {
+                    feedbackElement.textContent = "Incorreto. Tente novamente!";
+                    feedbackElement.className = "feedback incorrect";
+                }
+            } else {
+                feedbackElement.textContent = "Por favor, selecione uma opção.";
+                feedbackElement.className = "feedback incorrect";
+            }
+        }
+    </script>
+    <!-- Vincula o arquivo JavaScript externo (mesmo que vazio, mantém a estrutura) -->
+    <script src="script.js"></script>
+</body>
+</html>

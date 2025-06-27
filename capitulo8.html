@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 8: Segurança em Redes</title>
+   
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="capitulos.css">
+    
+</head>
+<body>
+  
+    <header>
+        <div class="container">
+            <h1>Desvendando as Redes</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#inicio">Início</a></li>
+                    <li><a href="index.html#jornada">Nossa Jornada</a></li>
+                    <li><a href="index.html#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="chapter-navigation-buttons">
+            <a href="index.html" class="back-button">← Início</a>
+            <a href="capitulo7.html" class="back-button">← Capítulo Anterior</a>
+            <a href="capitulo9.html" class="back-button">Próximo Capítulo →</a>
+        </div>
+
+       
+        <section class="chapter-progress">
+            <h3>Progresso da Jornada</h3>
+            <div class="progress-indicator">
+                <a href="capitulo1.html" class="chapter-dot completed" data-chapter="1">1</a>
+                <a href="capitulo2.html" class="chapter-dot completed" data-chapter="2">2</a>
+                <a href="capitulo3.html" class="chapter-dot completed" data-chapter="3">3</a>
+                <a href="capitulo4.html" class="chapter-dot completed" data-chapter="4">4</a>
+                <a href="capitulo5.html" class="chapter-dot completed" data-chapter="5">5</a>
+                <a href="capitulo6.html" class="chapter-dot completed" data-chapter="6">6</a>
+                <a href="capitulo7.html" class="chapter-dot completed" data-chapter="7">7</a>
+                <a href="capitulo8.html" class="chapter-dot completed current-chapter" data-chapter="8">8</a>
+                <a href="capitulo9.html" class="chapter-dot" data-chapter="9">9</a>
+            </div>
+            <p>Capítulos concluídos: <span id="completed-count">8</span> de <span id="total-chapters">9</span></p>
+        </section>
+
+        <section id="capitulo-intro" class="chapter-section">
+            <h2>Segurança em Redes</h2>
+            <p>
+                Até este ponto da nossa jornada, exploramos como as redes de computadores são construídas, como os dados viajam entre dispositivos e como aplicações e serviços funcionam. No entanto, o mundo digital, por mais interconectado que seja, não está isento de perigos. A <strong>Segurança em Redes</strong> é um campo crucial que visa proteger a integridade, a confidencialidade e a disponibilidade dos dados e sistemas contra ameaças e ataques maliciosos.
+            </p>
+            <p>
+                A Internet foi originalmente concebida com um modelo de "confiança mútua" entre os usuários, o que, infelizmente, a tornou inerentemente vulnerável a abusos. Com o crescimento exponencial do número de usuários, dispositivos e transações online, a necessidade de proteger as redes e as informações que trafegam por elas se tornou uma prioridade absoluta.
+            </p>
+            <p>
+                Neste capítulo, vamos mergulhar nos princípios da segurança de rede, entender os tipos de ataques mais comuns e as contramedidas utilizadas. Exploraremos o fascinante mundo da criptografia, o funcionamento de firewalls e as tecnologias de proteção que visam manter nossas informações seguras no vasto universo da Internet.
+            </p>
+        </section>
+
+        <section id="principios-seguranca" class="chapter-section">
+            <h3>Princípios de Segurança de Rede</h3>
+            <p>
+                A segurança em redes busca garantir três pilares fundamentais para a informação:
+            </p>
+            <ul>
+                <li>
+                    <h4>Confidencialidade (Confidentiality):</h4>
+                    <p>
+                        Garanta que apenas o remetente e o destinatário pretendido possam ler o conteúdo de uma mensagem. Isso significa que mesmo que uma mensagem seja interceptada por um atacante, ela não será compreensível. A <strong>criptografia</strong> é a principal ferramenta para alcançar a confidencialidade.
+                    </p>
+                </li>
+                <li>
+                    <h4>Autenticação (Authentication):</h4>
+                    <p>
+                        Garanta que remetente e destinatário possam confirmar a identidade um do outro. Isso impede que um atacante se passe por outra pessoa (falsificação de identidade). Você precisa ter certeza de que está falando com o servidor real do seu banco, e o servidor precisa ter certeza de que é você.
+                    </p>
+                </li>
+                <li>
+                    <h4>Integridade da Mensagem (Message Integrity):</h4>
+                    <p>
+                        Garanta que a mensagem recebida não foi alterada, adulterada ou corrompida durante o trânsito (acidentalmente ou maliciosamente). Se a mensagem for alterada, o receptor deve ser capaz de detectar essa alteração.
+                    </p>
+                </li>
+                <li>
+                    <h4>Não Repúdio (Non-repudiation):</h4>
+                    <p>
+                        Garanta que o remetente não possa negar que enviou uma mensagem. Se você enviou uma transação bancária, você não pode negar que a enviou. Isso é importante em transações comerciais e jurídicas.
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="malware-e-ataques" class="chapter-section">
+            <h3>Malware e Ataques Comuns</h3>
+            <p>
+                A Internet é um ambiente propício para a disseminação de software malicioso e a ocorrência de diversos tipos de ataques.
+            </p>
+            <ul>
+                <li>
+                    <h4>Malware (Software Malicioso):</h4>
+                    <p>
+                        Termo genérico para software projetado para causar danos, roubar informações ou ganhar controle sobre sistemas.
+                        <ul>
+                            <li><strong>Vírus:</strong> Se espalham inserindo-se em outros programas ou documentos. Geralmente, precisam de alguma ação do usuário (clique, abertura de arquivo) para se ativar e se replicar.</li>
+                            <li><strong>Worms:</strong> São autônomos e se propagam explorando vulnerabilidades na rede, sem a necessidade de interação do usuário. Podem se espalhar rapidamente por toda a Internet.</li>
+                            <li><strong>Spyware:</strong> Coleta informações sobre o usuário (hábitos de navegação, senhas) sem seu conhecimento e as envia para terceiros.</li>
+                            <li><strong>Adware:</strong> Exibe anúncios indesejados.</li>
+                            <li><strong>Ransomware:</strong> Sequestra dados ou sistemas, exigindo um resgate (geralmente em criptomoedas) para liberá-los.</li>
+                        </ul>
+                        Dispositivos infectados podem se tornar parte de uma <strong>botnet</strong>, uma rede de máquinas "zumbis" controladas por um atacante para realizar atividades maliciosas em larga escala.
+                    </p>
+                </li>
+                <li>
+                    <h4>Ataques de Negação de Serviço (DoS - Denial of Service):</h4>
+                    <p>
+                        Têm como objetivo tornar um serviço de rede, um hospedeiro ou uma infraestrutura indisponível para seus usuários legítimos.
+                        <ul>
+                            <li><strong>Ataques de Vulnerabilidade:</strong> Explorar falhas específicas em software para causar travamentos ou comportamento inesperado.</li>
+                            <li><strong>Inundação na Largura de Banda:</strong> O atacante envia um volume massivo de tráfego para a rede do alvo, sobrecarregando seus enlaces de comunicação e impedindo o acesso legítimo.</li>
+                            <li><strong>Inundação na Conexão:</strong> O atacante estabelece um grande número de conexões TCP (muitas vezes incompletas ou falsas) com o servidor do alvo, esgotando seus recursos e impedindo que ele atenda a conexões legítimas.</li>
+                        </ul>
+                        Em ataques <strong>DDoS (Distributed Denial of Service)</strong>, a inundação vem de múltiplos hospedeiros comprometidos (botnet), tornando a identificação da origem e a mitigação muito mais difíceis.
+                    </p>
+                </li>
+                <li>
+                    <h4>Análise de Pacotes (Packet Sniffing):</h4>
+                    <p>
+                        É a interceptação passiva e a gravação de todos os pacotes que passam por um segmento de rede. Um "sniffer" (analisador de pacotes) pode capturar informações sensíveis como senhas, se não estiverem criptografadas. É difícil de detectar, pois o sniffer apenas "escuta" o tráfego. A defesa primária é o uso de <strong>criptografia</strong> para proteger o conteúdo dos dados.
+                    </p>
+                </li>
+                <li>
+                    <h4>Falsificação de Identidade (IP Spoofing):</h4>
+                    <p>
+                        Um atacante cria pacotes com um endereço IP de origem falso, fazendo com que o receptor acredite que a mensagem veio de uma fonte confiável. Isso pode ser usado para enganar sistemas de segurança ou contornar restrições. A defesa é a <strong>autenticação</strong> do ponto final e a filtragem de tráfego na borda da rede.
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="criptografia" class="chapter-section">
+            <h3>Criptografia: A Arte da Comunicação Secreta</h3>
+            <p>
+                A <strong>criptografia</strong> é a ciência de codificar mensagens para protegê-las de leitores indesejados. Ela é a base de muitos serviços de segurança em rede.
+            </p>
+            <ul>
+                <li>
+                    <h4>Criptografia Simétrica (Chave Secreta):</h4>
+                    <p>
+                        Usa uma única chave (secreta e compartilhada) tanto para criptografar quanto para descriptografar a mensagem.
+                        <ul>
+                            <li><strong>Algoritmos:</strong> DES (Data Encryption Standard - mais antigo), 3DES, <strong>AES (Advanced Encryption Standard - padrão atual e amplamente usado)</strong>.</li>
+                            <li><strong>Vantagem:</strong> Muito rápida e eficiente para grandes volumes de dados.</li>
+                            <li><strong>Desafio:</strong> A distribuição segura da chave secreta. Como duas partes podem concordar em uma chave secreta sem que um atacante a intercepte?</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <h4>Criptografia Assimétrica (Chave Pública):</h4>
+                    <p>
+                        Usa um par de chaves relacionadas matematicamente:
+                        <ul>
+                            <li><strong>Chave Pública:</strong> É conhecida por todos. Usada para criptografar mensagens ou verificar assinaturas digitais.</li>
+                            <li><strong>Chave Privada:</strong> É secreta e mantida apenas pelo seu dono. Usada para descriptografar mensagens ou criar assinaturas digitais.</li>
+                        </ul>
+                        <ul>
+                            <li><strong>Algoritmos:</strong> <strong>RSA</strong> (Rivest, Shamir, Adleman - o mais popular), Diffie-Hellman (para troca de chaves).</li>
+                            <li><strong>Vantagem:</strong> Resolve o problema da distribuição de chaves (a chave pública pode ser enviada abertamente). Pode ser usada para confidencialidade e autenticação.</li>
+                            <li><strong>Desvantagem:</strong> Muito mais lenta que a criptografia simétrica.</li>
+                        </ul>
+                        Na prática, criptografia assimétrica é usada para **trocar chaves secretas** (que serão usadas para a comunicação principal) ou para **assinaturas digitais**, enquanto a comunicação de dados em massa é feita com criptografia simétrica (um exemplo disso é o SSL/TLS).
+                    </p>
+                </li>
+                <li>
+                    <h4>Funções Hash Criptográficas:</h4>
+                    <p>
+                        São algoritmos matemáticos que pegam uma entrada de qualquer tamanho e produzem uma saída de tamanho fixo (um "hash" ou "resumo"). As características importantes são:
+                        <ul>
+                            <li><strong>Irreversibilidade:</strong> É computacionalmente inviável recriar a mensagem original a partir do hash.</li>
+                            <li><strong>Resistência a Colisões:</strong> É muito difícil encontrar duas mensagens diferentes que produzam o mesmo hash.</li>
+                        </ul>
+                        São usadas para verificar a <strong>integridade</strong> de uma mensagem (qualquer pequena alteração na mensagem original resultará em um hash completamente diferente) e para armazenar senhas (armazena-se o hash da senha, não a senha em si). Exemplos: <strong>MD5</strong> (obsoleto), <strong>SHA-1</strong> (obsoleto), <strong>SHA-256</strong> (amplamente usado).
+                    </p>
+                </li>
+                <li>
+                    <h4>Assinaturas Digitais:</h4>
+                    <p>
+                        Usam criptografia de chave pública para garantir autenticidade, integridade e não repúdio.
+                        <ul>
+                            <li>O remetente "assina" uma mensagem (ou o hash da mensagem) usando sua <strong>chave privada</strong>.</li>
+                            <li>O receptor verifica a assinatura usando a <strong>chave pública</strong> do remetente.</li>
+                            <li>Isso prova que a mensagem veio daquele remetente (autenticação) e não foi alterada (integridade), e o remetente não pode negar que a enviou (não repúdio).</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <h4>Certificados Digitais e CAs (Certificate Authorities):</h4>
+                    <p>
+                        Um <strong>certificado digital</strong> é um documento eletrônico que vincula uma chave pública a uma identidade (de uma pessoa, servidor, organização). Ele é emitido por uma entidade confiável chamada <strong>Autoridade Certificadora (CA)</strong>, como a VeriSign. A CA assina digitalmente o certificado, atestando a autenticidade da chave pública. Isso é fundamental para a segurança da Web (HTTPS).
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="seguranca-aplicacoes" class="chapter-section">
+            <h3>Segurança em Aplicações: SSL/TLS</h3>
+            <p>
+                A segurança pode ser implementada em diferentes camadas da pilha de protocolos. O <strong>SSL (Secure Sockets Layer)</strong>, e sua versão mais moderna e segura, o <strong>TLS (Transport Layer Security)</strong>, são protocolos que fornecem segurança na camada de aplicação, sobre o TCP.
+            </p>
+            <ul>
+                <li>
+                    <h4>SSL/TLS (HTTPS):</h4>
+                    <p>
+                        Amplamente usados para proteger comunicações Web (HTTP com SSL/TLS é o <strong>HTTPS</strong>). Eles oferecem:
+                        <ul>
+                            <li><strong>Criptografia:</strong> Confidencialidade dos dados.</li>
+                            <li><strong>Integridade dos Dados:</strong> Verificação de que os dados não foram alterados.</li>
+                            <li><strong>Autenticação do Servidor:</strong> O cliente verifica a identidade do servidor (via certificados digitais).</li>
+                            <li><strong>Autenticação do Cliente (Opcional):</strong> O servidor pode verificar a identidade do cliente.</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <h4>Handshake SSL/TLS:</h4>
+                    <p>
+                        É um processo complexo que envolve criptografia simétrica e assimétrica para estabelecer uma sessão segura.
+                        <ol>
+                            <li><strong>Handshake:</strong> Cliente e servidor negociam algoritmos de criptografia e trocam chaves usando criptografia assimétrica.</li>
+                            <li><strong>Troca de Chaves Simétricas:</strong> Uma chave secreta simétrica é gerada e distribuída com segurança usando a criptografia assimétrica.</li>
+                            <li><strong>Transferência de Dados Criptografados:</strong> A partir de então, todos os dados da aplicação são criptografados e autenticados usando a chave simétrica e funções hash.</li>
+                        </ol>
+                    </p>
+                </li>
+                <li>
+                    <h4>Outras Aplicações Seguras:</h4>
+                    <p>
+                        Além do HTTPS, SSL/TLS também são usados para proteger e-mail (SMTPS, IMAPS, POP3S), acesso remoto (FTPS, SSH - que usa seu próprio protocolo de transporte seguro), e VPNs.
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="seguranca-camada-rede-ipsec" class="chapter-section">
+            <h3>Segurança na Camada de Rede: IPsec</h3>
+            <p>
+                Enquanto SSL/TLS fornece segurança para aplicações específicas, o <strong>IPsec (IP Security)</strong> oferece segurança em nível de camada de rede, protegendo todos os dados que trafegam sobre IP. É frequentemente usado para construir VPNs.
+            </p>
+            <ul>
+                <li>
+                    <h4>Serviços do IPsec:</h4>
+                    <ul>
+                        <li><strong>Autenticação:</strong> Garante a autenticidade da origem dos pacotes IP.</li>
+                        <li><strong>Confidencialidade (Criptografia):</strong> Criptografa o conteúdo dos pacotes IP.</li>
+                        <li><strong>Integridade:</strong> Garante que os pacotes IP não foram alterados.</li>
+                        <li><strong>Proteção Anti-Replay:</strong> Impede que atacantes capturem e retransmitam pacotes antigos.</li>
+                    </ul>
+                </li>
+                <li>
+                    <h4>Modos de Operação:</h4>
+                    <ul>
+                        <li><strong>Modo Transporte:</strong> Protege apenas o payload do pacote IP, deixando o cabeçalho IP original visível. Usado principalmente entre dois hospedeiros.</li>
+                        <li><strong>Modo Túnel:</strong> Criptografa e autentica o pacote IP completo (cabeçalho + payload) e o encapsula em um novo pacote IP com um novo cabeçalho. Usado para VPNs entre redes (gateway-to-gateway) ou entre um hospedeiro e um gateway.</li>
+                    </ul>
+                </li>
+                <li>
+                    <h4>Protocolos do IPsec:</h4>
+                    <ul>
+                        <li><strong>AH (Authentication Header):</strong> Fornece autenticação e integridade para pacotes IP, mas não criptografia.</li>
+                        <li><strong>ESP (Encapsulating Security Payload):</strong> Fornece confidencialidade, autenticação e integridade para pacotes IP. É o mais usado.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section id="seguranca-operacional" class="chapter-section">
+            <h3>Segurança Operacional: Firewalls e IDS/IPS</h3>
+            <p>
+                Além da criptografia e dos protocolos seguros, a segurança de rede também depende de dispositivos e sistemas que monitoram e controlam o tráfego.
+            </p>
+            <ul>
+                <li>
+                    <h4>Firewalls:</h4>
+                    <p>
+                        São dispositivos de segurança que monitoram e controlam o tráfego de rede de entrada e saída, com base em regras de segurança predeterminadas. Eles atuam como uma barreira entre uma rede confiável (interna) e redes não confiáveis (externas, como a Internet).
+                        <ul>
+                            <li><strong>Filtro de Pacotes (Packet-Filtering):</strong> Analisa os cabeçalhos dos pacotes (endereços IP, números de porta, flags TCP) e decide se permite ou nega o tráfego. É a forma mais básica.</li>
+                            <li><strong>Firewalls com Estado (Stateful Firewalls):</strong> Além de filtrar cabeçalhos, eles monitoram o "estado" das conexões TCP ativas. Por exemplo, permitem pacotes de resposta a uma conexão que foi iniciada internamente. Muito mais seguros que filtros simples.</li>
+                            <li><strong>Firewalls de Nível de Aplicação (Application-Level Gateways/Proxies):</strong> Inspecionam o tráfego em nível de aplicação (ex: HTTP, FTP), compreendendo o conteúdo da comunicação. Mais seguros, mas com maior sobrecarga de processamento.</li>
+                            <li><strong>Next-Generation Firewalls (NGFW):</strong> Combinam as funções de firewalls tradicionais com inspeção profunda de pacotes, controle de aplicações, sistemas de prevenção de intrusões (IPS) e outras funcionalidades avançadas.</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <h4>Sistemas de Detecção e Prevenção de Intrusões (IDS/IPS):</h4>
+                    <p>
+                        Complementam os firewalls monitorando atividades suspeitas na rede.
+                        <ul>
+                            <li><strong>IDS (Intrusion Detection System):</strong> Monitora o tráfego de rede ou eventos em sistemas em busca de padrões que indiquem atividades maliciosas ou violações de segurança. Ele **detecta** a intrusão e gera alertas.</li>
+                            <li><strong>IPS (Intrusion Prevention System):</strong> Vai um passo além do IDS. Além de detectar, ele pode **prevenir** a intrusão, bloqueando ativamente o tráfego malicioso ou reconfigurando a rede para mitigar o ataque.</li>
+                            <li><strong>Baseados em Assinaturas:</strong> Detectam ataques conhecidos por meio de padrões (assinaturas) de tráfego malicioso.</li>
+                            <li><strong>Baseados em Anomalias:</strong> Criam um perfil do comportamento normal da rede e alertam/bloqueiam quando detectam desvios significativos desse perfil.</li>
+                        </ul>
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="resumo-capitulo" class="chapter-section">
+            <h3>Resumo do Capítulo</h3>
+            <p>
+                Neste capítulo, abordamos um dos pilares mais críticos da computação moderna: a <strong>Segurança em Redes</strong>. Exploramos os princípios fundamentais que guiam a segurança da informação (confidencialidade, autenticação, integridade e não repúdio) e os perigos que espreitam na Internet, desde <strong>malware</strong> (vírus, worms, spyware) até <strong>ataques de negação de serviço (DoS/DDoS)</strong>, <strong>análise de pacotes</strong> e <strong>falsificação de identidade (IP spoofing)</strong>.
+            </p>
+            <p>
+                Em seguida, mergulhamos no mundo da <strong>criptografia</strong>, aprendendo sobre os conceitos de chave simétrica e assimétrica, as poderosas funções hash, as assinaturas e certificados digitais. Vimos como essas ferramentas são aplicadas para construir protocolos seguros como o <strong>SSL/TLS (HTTPS)</strong>, que protege nossas comunicações na camada de aplicação, e o <strong>IPsec</strong>, que oferece segurança em nível de camada de rede.
+            </p>
+            <p>
+                Finalmente, exploramos os componentes essenciais da <strong>segurança operacional</strong>, como os <strong>firewalls</strong> (filtragem de pacotes, estado, aplicação, NGFW) e os sistemas <strong>IDS/IPS</strong>, que atuam na detecção e prevenção de intrusões.
+            </p>
+            <p>
+                A segurança em redes é um campo em constante evolução, exigindo vigilância e a aplicação contínua de novas técnicas. Compreender esses conceitos é fundamental para proteger dados e sistemas em um ambiente digital cada vez mais complexo. No próximo capítulo, o último da nossa jornada, exploraremos o gerenciamento de redes.
+            </p>
+        </section>
+
+        <section id="atividades" class="chapter-section">
+            <h3>Atividades de Aprendizagem</h3>
+            <p>Teste seus conhecimentos sobre o Capítulo 8 com as seguintes perguntas de múltipla escolha:</p>
+
+            <!-- Questão 1 -->
+            <div class="question-block">
+                <p>1. Qual pilar da segurança de rede garante que apenas o remetente e o destinatário pretendido possam ler o conteúdo de uma mensagem, mesmo que ela seja interceptada?</p>
+                <label>
+                    <input type="radio" name="q1_ch8" value="a"> A) Autenticação
+                </label>
+                <label>
+                    <input type="radio" name="q1_ch8" value="b"> B) Integridade da Mensagem
+                </label>
+                <label>
+                    <input type="radio" name="q1_ch8" value="c"> C) Não Repúdio
+                </label>
+                <label>
+                    <input type="radio" name="q1_ch8" value="d"> D) Confidencialidade
+                </label>
+                <button class="check-button" onclick="checkAnswer('q1_ch8', 'd', 'feedback1_ch8')">Verificar Resposta</button>
+                <div class="feedback" id="feedback1_ch8"></div>
+            </div>
+
+            <!-- Questão 2 -->
+            <div class="question-block">
+                <p>2. Qual tipo de malware é autônomo e se propaga explorando vulnerabilidades na rede sem a necessidade de interação do usuário?</p>
+                <label>
+                    <input type="radio" name="q2_ch8" value="a"> A) Vírus
+                </label>
+                <label>
+                    <input type="radio" name="q2_ch8" value="b"> B) Spyware
+                </label>
+                <label>
+                    <input type="radio" name="q2_ch8" value="c"> C) Worm
+                </label>
+                <label>
+                    <input type="radio" name="q2_ch8" value="d"> D) Ransomware
+                </label>
+                <button class="check-button" onclick="checkAnswer('q2_ch8', 'c', 'feedback2_ch8')">Verificar Resposta</button>
+                <div class="feedback" id="feedback2_ch8"></div>
+            </div>
+
+            <!-- Questão 3 -->
+            <div class="question-block">
+                <p>3. Na criptografia de chave pública, qual chave é conhecida por todos e usada para criptografar mensagens que só podem ser lidas pela chave privada correspondente?</p>
+                <label>
+                    <input type="radio" name="q3_ch8" value="a"> A) Chave Secreta
+                </label>
+                <label>
+                    <input type="radio" name="q3_ch8" value="b"> B) Chave Privada
+                </label>
+                <label>
+                    <input type="radio" name="q3_ch8" value="c"> C) Chave Pública
+                </label>
+                <label>
+                    <input type="radio" name="q3_ch8" value="d"> D) Chave de Sessão
+                </label>
+                <button class="check-button" onclick="checkAnswer('q3_ch8', 'c', 'feedback3_ch8')">Verificar Resposta</button>
+                <div class="feedback" id="feedback3_ch8"></div>
+            </div>
+
+            <!-- Questão 4 -->
+            <div class="question-block">
+                <p>4. Qual protocolo fornece segurança em nível de camada de rede, protegendo todos os dados que trafegam sobre IP e sendo frequentemente usado para construir VPNs?</p>
+                <label>
+                    <input type="radio" name="q4_ch8" value="a"> A) SSL/TLS
+                </label>
+                <label>
+                    <input type="radio" name="q4_ch8" value="b"> B) HTTPS
+                </label>
+                <label>
+                    <input type="radio" name="q4_ch8" value="c"> C) IPsec
+                </label>
+                <label>
+                    <input type="radio" name="q4_ch8" value="d"> D) SNMP
+                </label>
+                <button class="check-button" onclick="checkAnswer('q4_ch8', 'c', 'feedback4_ch8')">Verificar Resposta</button>
+                <div class="feedback" id="feedback4_ch8"></div>
+            </div>
+
+            <!-- Questão 5 -->
+            <div class="question-block">
+                <p>5. Em segurança operacional, qual sistema monitora o tráfego de rede em busca de padrões de atividades maliciosas e pode ativamente bloquear o tráfego ou reconfigurar a rede para mitigar um ataque?</p>
+                <label>
+                    <input type="radio" name="q5_ch8" value="a"> A) Firewall de Filtro de Pacotes
+                </label>
+                <label>
+                    <input type="radio" name="q5_ch8" value="b"> B) IDS (Intrusion Detection System)
+                </label>
+                <label>
+                    <input type="radio" name="q5_ch8" value="c"> C) IPS (Intrusion Prevention System)
+                </label>
+                <label>
+                    <input type="radio" name="q5_ch8" value="d"> D) Roteador
+                </label>
+                <button class="check-button" onclick="checkAnswer('q5_ch8', 'c', 'feedback5_ch8')">Verificar Resposta</button>
+                <div class="feedback" id="feedback5_ch8"></div>
+            </div>
+        </section>
+
+        <div class="chapter-navigation-buttons">
+            <a href="capitulo7.html" class="back-button">← Capítulo Anterior</a>
+            <a href="capitulo9.html" class="back-button">Próximo Capítulo →</a>
+        </div>
+    </main>
+
+    <!-- Rodapé do Site -->
+    <footer id="contato">
+        <div class="container">
+            <p>&copy; 2025 Desvendando as Redes. Todos os direitos reservados.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script para verificar as respostas -->
+    <script>
+        function checkAnswer(questionName, correctAnswer, feedbackId) {
+            const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+            const feedbackElement = document.getElementById(feedbackId);
+
+            if (selectedOption) {
+                if (selectedOption.value === correctAnswer) {
+                    feedbackElement.textContent = "Correto! 🎉";
+                    feedbackElement.className = "feedback correct";
+                } else {
+                    feedbackElement.textContent = "Incorreto. Tente novamente!";
+                    feedbackElement.className = "feedback incorrect";
+                }
+            } else {
+                feedbackElement.textContent = "Por favor, selecione uma opção.";
+                feedbackElement.className = "feedback incorrect";
+            }
+        }
+    </script>
+    <!-- Vincula o arquivo JavaScript externo (mesmo que vazio, mantém a estrutura) -->
+    <script src="script.js"></script>
+</body>
+</html>

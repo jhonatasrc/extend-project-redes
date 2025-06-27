@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 5: Camada de Enlace</title>
+   
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+   
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="capitulos.css">
+    
+</head>
+<body>
+    
+    <header>
+        <div class="container">
+            <h1>Desvendando as Redes</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#inicio">Início</a></li>
+                    <li><a href="index.html#jornada">Nossa Jornada</a></li>
+                    <li><a href="index.html#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Botões de navegação no topo da página -->
+        <div class="chapter-navigation-buttons">
+            <a href="index.html" class="back-button">← Início</a>
+            <a href="capitulo4.html" class="back-button">← Capítulo Anterior</a>
+            <a href="capitulo6.html" class="back-button">Próximo Capítulo →</a>
+        </div>
+
+        <!-- Seção de Progresso dos Capítulos -->
+        <section class="chapter-progress">
+            <h3>Progresso da Jornada</h3>
+            <div class="progress-indicator">
+                <a href="capitulo1.html" class="chapter-dot completed" data-chapter="1">1</a>
+                <a href="capitulo2.html" class="chapter-dot completed" data-chapter="2">2</a>
+                <a href="capitulo3.html" class="chapter-dot completed" data-chapter="3">3</a>
+                <a href="capitulo4.html" class="chapter-dot completed" data-chapter="4">4</a>
+                <a href="capitulo5.html" class="chapter-dot completed current-chapter" data-chapter="5">5</a>
+                <a href="capitulo6.html" class="chapter-dot" data-chapter="6">6</a>
+                <a href="capitulo7.html" class="chapter-dot" data-chapter="7">7</a>
+                <a href="capitulo8.html" class="chapter-dot" data-chapter="8">8</a>
+                <a href="capitulo9.html" class="chapter-dot" data-chapter="9">9</a>
+            </div>
+            <p>Capítulos concluídos: <span id="completed-count">5</span> de <span id="total-chapters">9</span></p>
+        </section>
+
+        <section id="capitulo-intro" class="chapter-section">
+            <h2>Camada de Enlace</h2>
+            <p>
+                No capítulo anterior, aprofundamos na camada de rede, a responsável por rotear pacotes de um hospedeiro a outro através de toda a Internet. Agora, vamos descer um nível na pilha de protocolos e focar na <strong>Camada de Enlace</strong>. Pense na camada de enlace como a responsável pelas "entregas locais" entre dois dispositivos que estão diretamente conectados (adjacentes).
+            </p>
+            <p>
+                A camada de enlace tem a tarefa de levar os dados de um nó (pode ser um hospedeiro ou um roteador) para um nó <strong>adjacente</strong> ao longo de um único enlace de comunicação. Embora a camada de rede se preocupe com o caminho fim a fim, a camada de enlace garante que cada "salto" individual (cada trecho da viagem do pacote) seja feito de forma confiável e eficiente.
+            </p>
+            <p>
+                Neste capítulo, exploraremos os serviços fornecidos pela camada de enlace, as técnicas de detecção e correção de erros, como múltiplos dispositivos compartilham um mesmo meio de comunicação (protocolos de acesso múltiplo), o papel dos endereços MAC, a onipresente Ethernet, o funcionamento dos comutadores (switches) e conceitos mais avançados como VLANs e MPLS.
+            </p>
+        </section>
+
+        <section id="servicos-camada-enlace" class="chapter-section">
+            <h3>Serviços da Camada de Enlace</h3>
+            <p>
+                A camada de enlace fornece um conjunto de serviços para a camada de rede acima dela. O principal serviço é a transferência de dados de um nó para um nó adjacente.
+            </p>
+            <ul>
+                <li>
+                    <h4>Enquadramento (Framing):</h4>
+                    <p>
+                        A camada de rede entrega um datagrama à camada de enlace, que o encapsula em um <strong>quadro (frame)</strong>. Um quadro inclui campos de dados (o datagrama) e de cabeçalho, além de um campo de trailer. O cabeçalho e o trailer do quadro contêm informações importantes, como o endereço físico (MAC) de origem e destino, e bits para detecção de erros. O enquadramento é essencial para que o receptor possa identificar onde um quadro começa e termina.
+                    </p>
+                </li>
+                <li>
+                    <h4>Acesso ao Meio (Media Access):</h4>
+                    <p>
+                        Quando vários nós compartilham um mesmo meio de transmissão (como em uma rede Wi-Fi ou um cabo Ethernet compartilhado), a camada de enlace precisa de regras para controlar quem pode transmitir dados em um dado momento para evitar colisões. Os <strong>protocolos de acesso múltiplo</strong> são responsáveis por isso.
+                    </p>
+                </li>
+                <li>
+                    <h4>Detecção e Correção de Erros:</h4>
+                    <p>
+                        Os bits em um quadro podem ser corrompidos por ruído no enlace. A camada de enlace pode incluir mecanismos para <strong>detectar erros</strong> e, em alguns casos, até mesmo <strong>corrigir erros</strong>. Isso é feito adicionando bits de detecção de erro ao quadro, que o receptor verifica. Se um erro for detectado, o quadro pode ser descartado ou uma retransmissão pode ser solicitada.
+                    </p>
+                </li>
+                <li>
+                    <h4>Transferência Confiável de Dados:</h4>
+                    <p>
+                        Alguns protocolos de enlace de dados (mas não todos) fornecem um serviço de transferência confiável, garantindo que os quadros sejam entregues sem erros e na ordem correta. Isso é feito através de confirmações (ACKs) e retransmissões, de forma semelhante ao TCP, mas em um escopo "salto a salto". Redes com alta taxa de erros (como redes sem fio) podem se beneficiar mais dessa confiabilidade no nível do enlace.
+                    </p>
+                </li>
+                <li>
+                    <h4>Controle de Fluxo:</h4>
+                    <p>
+                        Assim como na camada de transporte, a camada de enlace pode usar controle de fluxo para impedir que um nó remetente sobrecarregue o buffer do nó receptor adjacente.
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="deteccao-correcao-erros" class="chapter-section">
+            <h3>Detecção e Correção de Erros</h3>
+            <p>
+                Bits podem ser "virados" (corrompidos) durante a transmissão. A camada de enlace (e também a de transporte) usa técnicas para detectar e, às vezes, corrigir esses erros.
+            </p>
+            <ul>
+                <li>
+                    <h4>Bits de Paridade:</h4>
+                    <p>
+                        O método mais simples. Adiciona um bit extra ao dado para que o número total de bits 1 seja par (paridade par) ou ímpar (paridade ímpar). Detecta apenas um número ímpar de erros de bits.
+                        <ul>
+                            <li><strong>Paridade de Bit Único:</strong> Detecta um único erro de bit.</li>
+                            <li><strong>Paridade Bidimensional:</strong> Organiza os dados em uma grade e adiciona bits de paridade para cada linha e coluna. Pode detectar e até corrigir erros de bit único.</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <h4>Checksum (Soma de Verificação):</h4>
+                    <p>
+                        Usado principalmente na camada de transporte (UDP, TCP) e na camada de rede (IP, ICMP). Os bytes de dados são tratados como números, somados (complemento de um), e o resultado é o checksum. No receptor, o checksum é recalculado e comparado. Detecta a maioria dos erros, mas não todos.
+                    </p>
+                </li>
+                <li>
+                    <h4>CRC (Cyclic Redundancy Check - Verificação de Redundância Cíclica):</h4>
+                    <p>
+                        É a técnica de detecção de erro mais robusta e amplamente usada na camada de enlace (Ethernet, Wi-Fi, HDLC, ADSL). O remetente trata os bits como um número binário e os divide por um "polinômio gerador" padrão. O resto dessa divisão é o CRC, que é adicionado ao quadro. O receptor realiza a mesma divisão; se o resto for zero, presume-se que não há erros. O CRC pode detectar todos os erros de rajada (burst errors) de comprimento menor ou igual ao grau do polinômio, e uma alta porcentagem de erros maiores.
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="protocolos-acesso-multiplo" class="chapter-section">
+            <h3>Protocolos de Acesso Múltiplo</h3>
+            <p>
+                Quando vários nós compartilham o mesmo meio de transmissão ("canal de difusão"), como em uma rede Wi-Fi ou um antigo cabo Ethernet, eles precisam de um protocolo para coordenar o acesso ao meio, evitando que todos tentem transmitir ao mesmo tempo e causem colisões.
+            </p>
+            <ul>
+                <li>
+                    <h4>Classificação:</h4>
+                    <ul>
+                        <li>
+                            <strong>Protocolos de Divisão de Canal:</strong> Dividem o meio em partes menores (tempo, frequência, código), permitindo acesso dedicado sem colisões.
+                            <ul>
+                                <li><strong>TDMA (Time Division Multiple Access):</strong> Cada nó recebe um "slot" de tempo exclusivo para transmitir.</li>
+                                <li><strong>FDMA (Frequency Division Multiple Access):</strong> Cada nó recebe uma "frequência" exclusiva para transmitir.</li>
+                                <li><strong>CDMA (Code Division Multiple Access):</strong> Diferentes códigos "espalham" os dados, permitindo que vários usuários transmitam simultaneamente em toda a banda de frequência, mas usando códigos diferentes para separação.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Protocolos de Acesso Aleatório:</strong> Os nós transmitem sem coordenação prévia. Colisões podem ocorrer, e são resolvidas por mecanismos de detecção e retransmissão.
+                            <ul>
+                                <li>
+                                    <strong>ALOHA:</strong>
+                                    <ul>
+                                        <li><strong>ALOHA Puro:</strong> Transmite imediatamente. Se houver colisão (não recebe confirmação), retransmite após um tempo aleatório.</li>
+                                        <li><strong>ALOHA Slotado:</strong> O tempo é dividido em "slots". Os nós só podem transmitir no início de um slot, reduzindo a chance de colisões (elas ocorrem apenas se dois nós iniciarem no mesmo slot).</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <strong>CSMA (Carrier Sense Multiple Access - Acesso Múltiplo por Sensoriamento de Portadora):</strong> Um nó "ouve" o canal antes de transmitir. Se o canal estiver ocupado, espera.
+                                    <ul>
+                                        <li><strong>CSMA/CD (CSMA com Detecção de Colisão):</strong> Usado em Ethernet com fio. O nó escuta enquanto transmite. Se detectar uma colisão, para de transmitir, envia um sinal de "congestionamento" e retransmite após um tempo aleatório. Isso economiza tempo, pois a transmissão é abortada logo após a colisão.</li>
+                                        <li><strong>CSMA/CA (CSMA com Prevenção de Colisão):</strong> Usado em redes sem fio (Wi-Fi). Devido ao problema de "terminal oculto" (nós não conseguem se ouvir mutuamente), a detecção de colisão é difícil. Em vez disso, tenta-se **evitar** colisões. Pode usar mensagens RTS/CTS (Request To Send / Clear To Send) para reservar o canal.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Protocolos de Tomada de Vez (Taking-Turns Protocols):</strong> Os nós se revezam no acesso ao canal, como em uma fila organizada.
+                            <ul>
+                                <li><strong>Polling:</strong> Um nó "mestre" pergunta a cada nó, em sequência, se ele tem algo para enviar. Centralizado.</li>
+                                <li><strong>Token Passing:</strong> Um "token" (ficha) circula entre os nós. Apenas o nó que possui o token pode transmitir. Descentralizado.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section id="enderecamento-mac-arp" class="chapter-section">
+            <h3>Endereçamento de Camada de Enlace (MAC) e ARP</h3>
+            <p>
+                Cada adaptador de rede (como uma placa Ethernet ou Wi-Fi) em um hospedeiro ou roteador tem um endereço único, chamado <strong>endereço MAC (Media Access Control)</strong> ou endereço físico.
+            </p>
+            <ul>
+                <li>
+                    <h4>Endereços MAC (Endereços Físicos):</h4>
+                    <p>
+                        Um endereço MAC é um identificador de 6 bytes (48 bits), geralmente gravado na ROM da placa de rede pelo fabricante. É representado em hexadecimal (ex: `00-1A-C2-00-5E-8C`). Ele é único mundialmente.
+                    </p>
+                    <p>
+                        Diferente dos endereços IP (que são lógicos e podem mudar de rede para rede), o endereço MAC é fixo para o hardware. Quadros de camada de enlace são endereçados usando endereços MAC para entregas "salto a salto" na mesma rede local.
+                    </p>
+                </li>
+                <li>
+                    <h4>ARP (Address Resolution Protocol - Protocolo de Resolução de Endereços):</h4>
+                    <p>
+                        O ARP é um protocolo que opera na camada de enlace (ou entre enlace e rede) para traduzir um endereço IP em um endereço MAC correspondente na mesma sub-rede.
+                    </p>
+                    <p>
+                        <strong>Como funciona:</strong>
+                        <ol>
+                            <li>Um hospedeiro (A) quer enviar um datagrama IP para outro hospedeiro (B) na mesma sub-rede, mas só conhece o IP de B.</li>
+                            <li>A verifica seu cache ARP. Se não encontrar o MAC de B, A envia uma mensagem de <strong>requisição ARP</strong> (broadcast) para todos os dispositivos na sub-rede, perguntando "Quem tem o IP X.X.X.X? Qual é o seu MAC?".</li>
+                            <li>O hospedeiro (B) com o IP X.X.X.X recebe a requisição e envia uma mensagem de <strong>resposta ARP</strong> (unicast) diretamente para A, contendo seu endereço MAC.</li>
+                            <li>A recebe a resposta, armazena o mapeamento IP-MAC em seu cache ARP (que expira após um tempo) e pode então encapsular o datagrama IP em um quadro com o endereço MAC de B para enviá-lo.</li>
+                        </ol>
+                    </p>
+                    <p>
+                        Para enviar um datagrama IP para um hospedeiro em <strong>outra sub-rede</strong>, o hospedeiro remetente usa o ARP para descobrir o endereço MAC do seu roteador de primeira parada (gateway padrão). O datagrama é então enviado para o roteador, que se encarrega de roteá-lo para a rede de destino.
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="ethernet" class="chapter-section">
+            <h3>Ethernet</h3>
+            <p>
+                A <strong>Ethernet</strong> é a tecnologia de rede local (LAN) com fio mais dominante no mundo. Ela é um padrão da IEEE (Instituto de Engenheiros Eletricistas e Eletrônicos) sob a família <strong>IEEE 802.3</strong>.
+            </p>
+            <ul>
+                <li>
+                    <h4>Características da Ethernet:</h4>
+                    <ul>
+                        <li><strong>Não Confiável:</strong> A Ethernet (e seus ancestrais) não fornece serviço de transferência confiável na camada de enlace. Se um erro é detectado em um quadro, o quadro é simplesmente descartado, e a recuperação é deixada para as camadas superiores (TCP).</li>
+                        <li><strong>Sem Conexão:</strong> Não há estabelecimento de conexão prévia entre os adaptadores antes de enviar um quadro.</li>
+                        <li><strong>CSMA/CD:</strong> Historicamente, a Ethernet usava o protocolo de acesso múltiplo CSMA/CD em seus segmentos de barramento compartilhados (10Base-T). Hoje, a maioria das redes Ethernet usa comutadores, eliminando o problema de colisões no nível do segmento.</li>
+                    </ul>
+                </li>
+                <li>
+                    <h4>Estrutura do Quadro Ethernet:</h4>
+                    <p>
+                        Um quadro Ethernet (datagrama IP encapsulado) tem a seguinte estrutura:
+                        <pre>
++----------+------------+------------+------+-----+--------+----------+
+| Preâmbulo| End. Dest. | End. Orig. | Tipo | Dados | CRC    |
+| (8 bytes)| (6 bytes)  | (6 bytes)  | (2)  | (46-1500) | (4 bytes)|
++----------+------------+------------+------+-----+--------+----------+
+                        </pre>
+                        <ul>
+                            <li><strong>Preâmbulo:</strong> Sete bytes de `10101010` seguidos por um byte `10101011`. Usado para sincronização de clock do receptor.</li>
+                            <li><strong>Endereço de Destino (MAC):</strong> Endereço MAC do adaptador de destino (se unicast) ou broadcast (`FF-FF-FF-FF-FF-FF`).</li>
+                            <li><strong>Endereço de Origem (MAC):</strong> Endereço MAC do adaptador de origem.</li>
+                            <li><strong>Tipo:</strong> Indica o protocolo da camada superior para o qual o datagrama deve ser entregue (ex: IP).</li>
+                            <li><strong>Dados:</strong> O datagrama IP (payload), de 46 a 1500 bytes.</li>
+                            <li><strong>CRC:</strong> Verificação de Redundância Cíclica para detecção de erros.</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <h4>Ethernet em Meios Compartilhados: Hubs e Colisões:</h4>
+                    <p>
+                        Redes Ethernet antigas usavam **hubs**, que são dispositivos de camada física. Todos os dispositivos conectados a um hub compartilham um único domínio de colisão (ou seja, se dois transmitirem ao mesmo tempo, há colisão). O CSMA/CD era essencial nesse cenário. Hoje, hubs são raros.
+                    </p>
+                </li>
+                <li>
+                    <h4>Ethernet Comutado (Switched Ethernet):</h4>
+                    <p>
+                        A Ethernet moderna usa **comutadores (switches)**, que operam na camada de enlace. Um comutador Ethernet elimina colisões, pois ele cria um domínio de colisão separado para cada porta. Ele aprende dinamicamente os endereços MAC dos dispositivos conectados às suas portas e encaminha os quadros seletivamente para a porta correta, em vez de difundir para todas as portas como um hub. Isso melhora muito a performance da rede.
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="comutadores" class="chapter-section">
+            <h3>Comutadores (Switches): Conectando Redes Locais</h3>
+            <p>
+                Os comutadores (switches) são dispositivos de rede de camada de enlace (Camada 2 do OSI) que interconectam múltiplos dispositivos e segmentos de rede em uma LAN. Eles são muito mais "inteligentes" que os hubs.
+            </p>
+            <ul>
+                <li>
+                    <h4>Repasse e Aprendizado de Comutadores:</h4>
+                    <p>
+                        Um comutador não precisa de configuração manual para saber para onde enviar os quadros. Ele aprende dinamicamente a localização dos dispositivos conectados a ele.
+                    </p>
+                    <ul>
+                        <li><strong>Tabela de Comutação:</strong> Um comutador mantém uma <strong>tabela de comutação</strong> (também conhecida como tabela de endereços MAC ou tabela de encaminhamento) que mapeia endereços MAC para portas específicas e um tempo de validade.</li>
+                        <li><strong>Aprendizado Automático:</strong> Quando um comutador recebe um quadro, ele inspeciona o endereço MAC de origem do quadro. Se esse endereço não estiver em sua tabela, ele o adiciona (associando-o à porta de entrada). Isso é o <strong>aprendizado</strong>.</li>
+                        <li><strong>Encaminhamento (Repasse):</strong> Quando um comutador recebe um quadro com um endereço MAC de destino, ele consulta sua tabela:
+                            <ul>
+                                <li>Se o endereço de destino estiver na tabela e associado a uma porta diferente da de entrada, o quadro é enviado apenas para essa porta específica.</li>
+                                <li>Se o endereço de destino estiver na mesma porta de entrada (ou seja, o destino está no mesmo segmento que a origem), o quadro é descartado.</li>
+                                <li>Se o endereço de destino não estiver na tabela, ou se for um endereço de broadcast (`FF-FF-FF-FF-FF-FF`), o quadro é enviado para <strong>todas as portas</strong>, exceto a de entrada (isso é chamado de <strong>flooding</strong>). O dispositivo de destino responderá, e o comutador aprenderá sua localização na próxima vez.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h4>Comutadores vs. Roteadores:</h4>
+                    <p>
+                        Embora ambos encaminhem pacotes, comutadores e roteadores operam em camadas diferentes e têm objetivos distintos:
+                        <ul>
+                            <li><strong>Comutadores (Camada 2):</strong>
+                                <ul>
+                                    <li>Operam na camada de enlace (endereços MAC).</li>
+                                    <li>Repassam quadros entre interfaces na mesma LAN.</li>
+                                    <li>Não alteram os endereços MAC dos quadros.</li>
+                                    <li>Aprendem dinamicamente as tabelas de comutação.</li>
+                                    <li>Não impedem a propagação de broadcasts.</li>
+                                    <li>Conhecidos por serem "plug-and-play" e rápidos no encaminhamento.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Roteadores (Camada 3):</strong>
+                                <ul>
+                                    <li>Operam na camada de rede (endereços IP).</li>
+                                    <li>Roteiam datagramas entre diferentes sub-redes/LANs.</li>
+                                    <li>Alteram endereços MAC (e podem alterar IPs) ao repassar datagramas.</li>
+                                    <li>Constroem tabelas de roteamento usando algoritmos e protocolos de roteamento (RIP, OSPF, BGP).</li>
+                                    <li>Interrompem a propagação de broadcasts (cada interface de roteador é um domínio de broadcast).</li>
+                                    <li>Mais complexos, mais lentos no repasse (historicamente), mas mais versáteis.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="vlans" class="chapter-section">
+            <h3>Redes Locais Virtuais (VLANs)</h3>
+            <p>
+                Uma <strong>VLAN (Virtual Local Area Network)</strong> permite que os administradores de rede particionem uma única rede física (composta por um ou mais comutadores) em múltiplas redes locais virtuais. Isso significa que dispositivos conectados ao mesmo comutador físico podem estar em diferentes VLANs, e dispositivos em diferentes comutadores físicos podem estar na mesma VLAN.
+            </p>
+            <ul>
+                <li>
+                    <strong>Propósitos da VLAN:</strong>
+                    <ul>
+                        <li><strong>Isolamento de Broadcast:</strong> Cada VLAN é um domínio de broadcast separado, o que melhora a segurança e a performance ao reduzir a propagação de tráfego desnecessário.</li>
+                        <li><strong>Segurança:</strong> Separação de departamentos (ex: RH, Finanças) ou tipos de tráfego (dados, voz, vídeo).</li>
+                        <li><strong>Gerenciamento Flexível:</strong> Usuários podem ser movidos para diferentes VLANs (e, portanto, diferentes sub-redes IP) sem precisar mudar o cabeamento físico.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Comutadores de Tronco (Trunking Switches):</strong>
+                    <p>
+                        Para que quadros de diferentes VLANs possam viajar entre comutadores, é usado um enlace de "tronco" (trunk link). O padrão <strong>IEEE 802.1Q</strong> especifica como os comutadores adicionam uma tag de VLAN (de 12 bits) aos quadros Ethernet para identificar a qual VLAN o quadro pertence. Isso permite que um único enlace físico transporte o tráfego de múltiplas VLANs.
+                    </p>
+                </li>
+                <li>
+                    <strong>Roteamento Inter-VLAN:</strong>
+                    <p>
+                        Para que dispositivos em diferentes VLANs possam se comunicar, o tráfego deve passar por um roteador. O roteador tem interfaces (físicas ou lógicas - "router-on-a-stick") configuradas para cada VLAN.
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="mpls" class="chapter-section">
+            <h3>MPLS (Multiprotocol Label Switching)</h3>
+            <p>
+                O <strong>MPLS (Multiprotocol Label Switching)</strong> é uma técnica de encaminhamento de pacotes que opera entre a camada de rede (IP) e a camada de enlace. Ele foi desenvolvido para combinar a flexibilidade do roteamento IP com a velocidade do encaminhamento baseado em circuitos, e para suportar o roteamento baseado em políticas de tráfego (engenharia de tráfego).
+            </p>
+            <ul>
+                <li>
+                    <h4>Princípios do MPLS:</h4>
+                    <p>
+                        No MPLS, os pacotes IP são "embrulhados" com um pequeno cabeçalho MPLS contendo um <strong>rótulo (label)</strong>. O encaminhamento dos pacotes MPLS é feito com base apenas nesse rótulo, em vez de inspecionar o endereço IP de destino.
+                    </p>
+                    <ul>
+                        <li><strong>Roteadores de Borda MPLS (Label Edge Routers - LERs):</strong> Na entrada de uma rede MPLS, o LER adiciona um rótulo ao pacote IP, encaminhando-o para um caminho de rótulo. Na saída, ele remove o rótulo e repassa o pacote IP normal.</li>
+                        <li><strong>Roteadores de Rótulo (Label Switching Routers - LSRs):</strong> No interior da rede MPLS, os LSRs encaminham pacotes simplesmente trocando o rótulo de entrada por um rótulo de saída, sem precisar examinar o cabeçalho IP. Isso é muito mais rápido que uma consulta à tabela de roteamento IP.</li>
+                    </ul>
+                </li>
+                <li>
+                    <h4>Caminhos de Rótulo (LSPs - Label Switched Paths):</h4>
+                    <p>
+                        Os LSPs são caminhos pré-determinados e unidirecionais através da rede MPLS, pelos quais os pacotes com um determinado rótulo viajarão. Eles são estabelecidos antes da chegada dos pacotes de dados.
+                    </p>
+                </li>
+                <li>
+                    <h4>Vantagens do MPLS:</h4>
+                    <ul>
+                        <li><strong>Encaminhamento Mais Rápido:</strong> A troca de rótulos é mais rápida que a consulta de rotas IP complexas.</li>
+                        <li><strong>Engenharia de Tráfego:</strong> Permite desviar tráfego de um caminho congestionado para outro, mesmo que não seja o "caminho mais curto" baseado apenas no IP.</li>
+                        <li><strong>QoS (Qualidade de Serviço):</strong> Permite que diferentes tipos de tráfego (voz, vídeo) recebam tratamentos diferenciados e garantias.</li>
+                        <li><strong>Suporte a VPNs de Camada 3:</strong> Facilita a implementação de VPNs em larga escala.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section id="resumo-capitulo" class="chapter-section">
+            <h3>Resumo do Capítulo</h3>
+            <p>
+                Neste capítulo, exploramos em profundidade a <strong>Camada de Enlace</strong>, a "ponte" essencial para a comunicação de dados entre nós adjacentes. Começamos com os serviços que ela oferece, como enquadramento, acesso ao meio, detecção/correção de erros e transferência confiável.
+            </p>
+            <p>
+                Discutimos as importantes técnicas de <strong>detecção e correção de erros</strong> (paridade, checksum, CRC) que garantem a integridade dos dados em um enlace. Aprofundamos nos <strong>protocolos de acesso múltiplo</strong> (ALOHA, CSMA/CD, CSMA/CA), essenciais para compartilhar um mesmo meio, e diferenciamos a inteligência por trás dos <strong>endereços MAC</strong> e do protocolo <strong>ARP</strong> para resolução de endereços.
+            </p>
+            <p>
+                Vimos a onipresença da <strong>Ethernet</strong> e como ela evoluiu de redes baseadas em hubs para redes modernas baseadas em <strong>comutadores (switches)</strong>, que aprendem dinamicamente e eliminam colisões. Finalmente, abordamos conceitos mais avançados como as <strong>VLANs</strong>, que permitem a segmentação lógica de redes, e o <strong>MPLS</strong>, uma tecnologia que otimiza o encaminhamento e a engenharia de tráfego em grandes redes.
+            </p>
+            <p>
+                A camada de enlace, embora opere em um nível "local", é fundamental para a performance e confiabilidade das redes modernas. Ela complementa a camada de rede, fornecendo o "transporte rodoviário" eficiente para que os pacotes cheguem ao seu destino final. No próximo capítulo, exploraremos as redes sem fio e redes móveis.
+            </p>
+        </section>
+
+        <section id="atividades" class="chapter-section">
+            <h3>Atividades de Aprendizagem</h3>
+            <p>Teste seus conhecimentos sobre o Capítulo 5 com as seguintes perguntas de múltipla escolha:</p>
+
+            <!-- Questão 1 -->
+            <div class="question-block">
+                <p>1. Qual é a principal função da Camada de Enlace em uma rede de computadores?</p>
+                <label>
+                    <input type="radio" name="q1_ch5" value="a"> A) Roteamento de pacotes entre diferentes redes IP.
+                </label>
+                <label>
+                    <input type="radio" name="q1_ch5" value="b"> B) Fornecer comunicação lógica entre processos em sistemas finais.
+                </label>
+                <label>
+                    <input type="radio" name="q1_ch5" value="c"> C) Transferir dados de um nó para um nó adjacente ao longo de um único enlace.
+                </label>
+                <label>
+                    <input type="radio" name="q1_ch5" value="d"> D) Gerenciar aplicações de rede como HTTP e FTP.
+                </label>
+                <button class="check-button" onclick="checkAnswer('q1_ch5', 'c', 'feedback1_ch5')">Verificar Resposta</button>
+                <div class="feedback" id="feedback1_ch5"></div>
+            </div>
+
+            <!-- Questão 2 -->
+            <div class="question-block">
+                <p>2. Qual técnica de detecção de erro é mais robusta e amplamente utilizada na camada de enlace (ex: Ethernet, Wi-Fi), tratando os bits como um número binário e usando um polinômio gerador?</p>
+                <label>
+                    <input type="radio" name="q2_ch5" value="a"> A) Bits de Paridade
+                </label>
+                <label>
+                    <input type="radio" name="q2_ch5" value="b"> B) Checksum
+                </label>
+                <label>
+                    <input type="radio" name="q2_ch5" value="c"> C) CRC (Cyclic Redundancy Check)
+                </label>
+                <label>
+                    <input type="radio" name="q2_ch5" value="d"> D) Números de Sequência
+                </label>
+                <button class="check-button" onclick="checkAnswer('q2_ch5', 'c', 'feedback2_ch5')">Verificar Resposta</button>
+                <div class="feedback" id="feedback2_ch5"></div>
+            </div>
+
+            <!-- Questão 3 -->
+            <div class="question-block">
+                <p>3. Qual protocolo de acesso múltiplo é usado em redes Wi-Fi e tenta **evitar** colisões devido ao problema de "terminal oculto"?</p>
+                <label>
+                    <input type="radio" name="q3_ch5" value="a"> A) CSMA/CD
+                </label>
+                <label>
+                    <input type="radio" name="q3_ch5" value="b"> B) ALOHA Slotado
+                </label>
+                <label>
+                    <input type="radio" name="q3_ch5" value="c"> C) CSMA/CA
+                </label>
+                <label>
+                    <input type="radio" name="q3_ch5" value="d"> D) TDMA
+                </label>
+                <button class="check-button" onclick="checkAnswer('q3_ch5', 'c', 'feedback3_ch5')">Verificar Resposta</button>
+                <div class="feedback" id="feedback3_ch5"></div>
+            </div>
+
+            <!-- Questão 4 -->
+            <div class="question-block">
+                <p>4. O que é um endereço MAC?</p>
+                <label>
+                    <input type="radio" name="q4_ch5" value="a"> A) Um identificador lógico de 32 bits para hospedeiros em redes IP.
+                </label>
+                <label>
+                    <input type="radio" name="q4_ch5" value="b"> B) Um identificador de 6 bytes (48 bits) gravado na ROM da placa de rede, único mundialmente.
+                </label>
+                <label>
+                    <input type="radio" name="q4_ch5" value="c"> C) O nome de domínio de um servidor web.
+                </label>
+                <label>
+                    <input type="radio" name="q4_ch5" value="d"> D) Um número de porta usado por protocolos de transporte.
+                </label>
+                <button class="check-button" onclick="checkAnswer('q4_ch5', 'b', 'feedback4_ch5')">Verificar Resposta</button>
+                <div class="feedback" id="feedback4_ch5"></div>
+            </div>
+
+            <!-- Questão 5 -->
+            <div class="question-block">
+                <p>5. Qual tecnologia permite que os administradores de rede particionem uma única rede física (comutadores) em múltiplas redes locais virtuais, isolando domínios de broadcast?</p>
+                <label>
+                    <input type="radio" name="q5_ch5" value="a"> A) NAT (Network Address Translation)
+                </label>
+                <label>
+                    <input type="radio" name="q5_ch5" value="b"> B) MPLS (Multiprotocol Label Switching)
+                </label>
+                <label>
+                    <input type="radio" name="q5_ch5" value="c"> C) VLANs (Virtual Local Area Networks)
+                </label>
+                <label>
+                    <input type="radio" name="q5_ch5" value="d"> D) DHCP (Dynamic Host Configuration Protocol)
+                </label>
+                <button class="check-button" onclick="checkAnswer('q5_ch5', 'c', 'feedback5_ch5')">Verificar Resposta</button>
+                <div class="feedback" id="feedback5_ch5"></div>
+            </div>
+        </section>
+
+        <div class="chapter-navigation-buttons">
+            <a href="capitulo4.html" class="back-button">← Capítulo Anterior</a>
+            <a href="capitulo6.html" class="back-button">Próximo Capítulo →</a>
+        </div>
+    </main>
+
+ 
+    <footer id="contato">
+        <div class="container">
+            <p>&copy; 2025 Desvendando as Redes. Todos os direitos reservados.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script para verificar as respostas -->
+    <script>
+        function checkAnswer(questionName, correctAnswer, feedbackId) {
+            const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+            const feedbackElement = document.getElementById(feedbackId);
+
+            if (selectedOption) {
+                if (selectedOption.value === correctAnswer) {
+                    feedbackElement.textContent = "Correto! 🎉";
+                    feedbackElement.className = "feedback correct";
+                } else {
+                    feedbackElement.textContent = "Incorreto. Tente novamente!";
+                    feedbackElement.className = "feedback incorrect";
+                }
+            } else {
+                feedbackElement.textContent = "Por favor, selecione uma opção.";
+                feedbackElement.className = "feedback incorrect";
+            }
+        }
+    </script>
+    <!-- Vincula o arquivo JavaScript externo (mesmo que vazio, mantém a estrutura) -->
+    <script src="script.js"></script>
+</body>
+</html>

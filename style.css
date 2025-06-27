@@ -1,0 +1,338 @@
+/* Estilos Globais */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6; /* Cor de fundo suave */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    
+}
+
+/* Cabeçalho */
+header {
+    background-color: #1A2B2D; /* Cor de fundo escura da logo */
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem 1.5rem;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+header h1 {
+    font-size: 2.25rem; /* text-3xl */
+    font-weight: 700; /* font-bold */
+    margin-bottom: 1rem;
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 1.5rem; /* space-x-6 */
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600; /* font-semibold */
+    transition: color 0.3s ease;
+}
+
+header nav a:hover {
+    color: #4ECDC4; /* Teal mais claro para o hover */
+}
+
+/* Seção de Herói */
+.hero-section {
+    background-color: #f9fafb; /* Mantido claro para contraste */
+    padding: 5rem 1.5rem; /* py-20 px-6 */
+    text-align: center;
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+    margin: 1rem; /* m-4 */
+}
+
+.hero-section h2 {
+    font-size: 3rem; /* text-5xl */
+    font-weight: 800; /* font-extrabold */
+    color: #00BD9E; /* Teal vibrante da logo */
+    margin-bottom: 1.5rem; /* mb-6 */
+}
+
+.hero-section p {
+    font-size: 1.25rem; /* text-xl */
+    color: #4b5563; /* text-gray-700 */
+    margin-bottom: 2rem; /* mb-8 */
+    max-width: 48rem; /* max-w-3xl */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-section .button {
+    display: inline-block;
+    background-color: #00BD9E; /* Teal vibrante da logo */
+    color: white;
+    font-weight: 700; /* font-bold */
+    padding: 0.75rem 2rem; /* py-3 px-8 */
+    border-radius: 9999px; /* rounded-full */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-lg */
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.hero-section .button:hover {
+    background-color: #008C78; /* Teal escuro da logo para o hover */
+    transform: scale(1.05); /* hover:scale-105 */
+}
+
+/* Seções de Conteúdo Principal */
+main {
+    padding: 0 1rem; /* px-4 */
+    margin-top: 2rem; /* my-8 */
+    margin-bottom: 2rem;
+}
+
+main section {
+    background-color: white;
+    padding: 2rem; /* p-8 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+    margin-bottom: 2rem; /* mb-8 */
+}
+
+main section h3 {
+    font-size: 2.25rem; /* text-4xl */
+    font-weight: 700; /* font-bold */
+    color: #00BD9E; /* Teal vibrante da logo */
+    margin-bottom: 1.5rem; /* mb-6 */
+    text-align: center;
+}
+
+main section p {
+    font-size: 1.125rem; /* text-lg */
+    line-height: 1.75; /* leading-relaxed */
+    margin-bottom: 1.5rem; /* mb-6 */
+}
+
+/* Grid de Cartões */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Padrão para mobile */
+    gap: 2rem; /* gap-8 */
+}
+
+/* Cartões de Conteúdo */
+.card {
+    padding: 1.5rem; /* p-6 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* shadow-sm */
+    border: 1px solid;
+}
+
+/* Cores dos Cartões */
+.card.blue-theme { /* Renomeado para "Conceitos - Tema Verde Primário" */
+    background-color: #ECFDF5; /* Verde bem claro */
+    border-color: #A7F3D0; /* Verde claro */
+}
+
+.card.red-theme { /* Renomeado para "Segurança - Tema Verde Secundário" */
+    background-color: #E0F2F1; /* Verde/teal pálido */
+    border-color: #80CBC4; /* Teal médio */
+}
+
+.card.green-theme { /* Renomeado para "Futuro - Tema Verde Terciário" */
+    background-color: #B2DFDB; /* Teal pálido */
+    border-color: #80CBC4; /* Teal médio */
+}
+
+.card h4 {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 600; /* font-semibold */
+    margin-bottom: 0.75rem; /* mb-3 */
+}
+
+.card.blue-theme h4,
+.card.green-theme h4 {
+    color: #00BD9E; /* Teal vibrante da logo */
+}
+
+.card.red-theme h4 {
+    color: #008C78; /* Teal escuro da logo */
+}
+
+.card p {
+    color: #4b5563; /* text-gray-700 */
+    font-size: 1rem; /* Ajustado para o texto do cartão */
+    margin-bottom: 0; /* Remove a margem padrão do parágrafo */
+}
+
+.card ul {
+    list-style: disc;
+    padding-left: 1.25rem; /* pl-5 */
+    margin-top: 0.5rem; /* mt-2 */
+}
+
+.card strong {
+    font-weight: 700;
+    color: #008C78; /* Teal escuro da logo para destaque */
+}
+
+.card img {
+    width: 100%;
+    margin-top: 1rem; /* mt-4 */
+    border-radius: 0.375rem; /* rounded-md */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* shadow-sm */
+    height: auto; /* Garante que as imagens escalem de forma responsiva */
+}
+
+/* Rodapé */
+footer {
+    background-color: #1A2B2D; /* Cor de fundo escura da logo */
+    color: white;
+    padding: 1.5rem 1.5rem; /* py-6 px-6 */
+    margin-top: 2rem; /* mt-8 */
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    text-align: center;
+}
+
+footer .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem; /* space-x-6 */
+    margin-top: 1rem; /* mt-4 */
+}
+
+footer .social-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer .social-links a:hover {
+    color: #4ECDC4; /* Teal mais claro para o hover */
+}
+
+/* Formulario contato */
+.contact-form {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 2rem auto; /* Centraliza o formulário e adiciona margem */
+        }
+
+        .contact-form h3 {
+            font-size: 2rem;
+            color: #1A2B2D;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 0.3rem;
+            box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif; /* Consistência de fonte */
+        }
+
+        .form-group textarea {
+            resize: vertical; /* Permite redimensionar verticalmente */
+            min-height: 100px;
+        }
+
+        .contact-form .submit-button {
+            display: block;
+            width: 100%;
+            background-color: #00BD9E; /* Cor vibrante da logo */
+            color: white;
+            font-weight: 700;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .contact-form .submit-button:hover {
+            background-color: #008C78; /* Teal escuro da logo para o hover */
+            transform: scale(1.02);
+        }
+
+/* Media Queries para Responsividade */
+@media (min-width: 768px) {
+    header {
+        flex-direction: row;
+    }
+
+    header .container {
+        flex-direction: row;
+        justify-content: space-between; /* Corrigido para espaçar h1 e nav */
+        align-items: center; /* Alinha verticalmente */
+    }
+
+    header h1 {
+        margin-bottom: 0;
+    }
+
+    header nav ul {
+        gap: 1.5rem;
+    }
+
+    main {
+        padding: 0 1rem;
+    }
+
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr); /* md:grid-cols-2 */
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid-container.lg-cols-3 { /* Para as seções que precisam de 3 colunas em telas grandes */
+        grid-template-columns: repeat(3, 1fr); /* lg:grid-cols-3 */
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        padding: 0;
+    }
+}

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 4: Camada de Rede</title>
+  
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="capitulos.css">
+    
+</head>
+<body>
+   
+    <header>
+        <div class="container">
+            <h1>Desvendando as Redes</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#inicio">Início</a></li>
+                    <li><a href="index.html#jornada">Nossa Jornada</a></li>
+                    <li><a href="index.html#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="chapter-navigation-buttons">
+            <a href="index.html" class="back-button">← Início</a>
+            <a href="capitulo3.html" class="back-button">← Capítulo Anterior</a>
+            <a href="capitulo5.html" class="back-button">Próximo Capítulo →</a>
+        </div>
+
+        <!-- Seção de Progresso dos Capítulos -->
+        <section class="chapter-progress">
+            <h3>Progresso da Jornada</h3>
+            <div class="progress-indicator">
+                <a href="capitulo1.html" class="chapter-dot completed" data-chapter="1">1</a>
+                <a href="capitulo2.html" class="chapter-dot completed" data-chapter="2">2</a>
+                <a href="capitulo3.html" class="chapter-dot completed" data-chapter="3">3</a>
+                <a href="capitulo4.html" class="chapter-dot completed current-chapter" data-chapter="4">4</a>
+                <a href="capitulo5.html" class="chapter-dot" data-chapter="5">5</a>
+                <a href="capitulo6.html" class="chapter-dot" data-chapter="6">6</a>
+                <a href="capitulo7.html" class="chapter-dot" data-chapter="7">7</a>
+                <a href="capitulo8.html" class="chapter-dot" data-chapter="8">8</a>
+                <a href="capitulo9.html" class="chapter-dot" data-chapter="9">9</a>
+            </div>
+            <p>Capítulos concluídos: <span id="completed-count">4</span> de <span id="total-chapters">9</span></p>
+        </section>
+
+        <section id="capitulo-intro" class="chapter-section">
+            <h2>Camada de Rede</h2>
+            <p>
+                Após explorar as camadas de aplicação e transporte, que focam na comunicação entre processos, vamos agora mergulhar na <strong>Camada de Rede</strong>. Esta camada é o "coração" da Internet, responsável por levar pacotes de dados de um hospedeiro (computador ou dispositivo conectado) para outro, através de uma vasta rede de roteadores. Pense na camada de rede como o sistema postal global que garante que sua carta (pacote) chegue à cidade e ao prédio correto, independentemente de onde a carta foi enviada e de quantas agências postais (roteadores) ela precise passar.
+            </p>
+            <p>
+                A principal função da camada de rede é o <strong>encaminhamento fim a fim</strong> de pacotes (datagramas) entre sistemas finais. Para realizar isso, ela deve lidar com duas tarefas cruciais: <strong>repasse</strong> e <strong>roteamento</strong>.
+            </p>
+            <ul>
+                <li>
+                    <strong>Repasse (Forwarding):</strong> É a ação local de um roteador de mover um pacote de sua interface de entrada para a interface de saída apropriada. É como um funcionário dos correios decidindo para qual esteira um pacote deve ir dentro de uma agência.
+                </li>
+                <li>
+                    <strong>Roteamento (Routing):</strong> É o processo de determinar a rota completa que os pacotes percorrerão da origem ao destino. Isso envolve a criação de tabelas de repasse nos roteadores e é feito por algoritmos de roteamento. É como planejar a rota de uma carta desde o remetente até o destinatário final, passando por todas as agências necessárias.
+                </li>
+            </ul>
+            <p>
+                Neste capítulo, exploraremos os modelos de serviço da camada de rede, os princípios dos roteadores, o essencial Protocolo IP e os complexos algoritmos e protocolos de roteamento que fazem a Internet funcionar.
+            </p>
+        </section>
+
+        <section id="visao-geral-camada-rede" class="chapter-section">
+            <h3>Visão Geral da Camada de Rede</h3>
+            <p>
+                A camada de rede reside em cada hospedeiro e em cada roteador da rede. No remetente, a camada de transporte passa um segmento à camada de rede, que o encapsula em um <strong>datagrama</strong> e o encaminha para o destino. No receptor, a camada de rede entrega o segmento ao protocolo de transporte adequado.
+            </p>
+
+            <h4>Modelos de Serviço da Camada de Rede</h4>
+            <p>
+                Uma rede pode oferecer diferentes modelos de serviço para a camada de transporte. Os dois modelos principais são:
+            </p>
+            <ul>
+                <li>
+                    <h5>Serviço de Datagrama (Best-Effort Service):</h5>
+                    <p>
+                        Este é o modelo de serviço da Internet. Ele garante que os datagramas sejam entregues entre a origem e o destino, mas sem qualquer garantia de ordem, ausência de perda, atraso mínimo ou garantia de largura de banda. Cada datagrama é tratado de forma independente, e a rede tenta entregá-lo, mas não promete nada. A camada de transporte (TCP) é responsável pela confiabilidade, se necessária.
+                    </p>
+                </li>
+                <li>
+                    <h5>Serviço de Circuito Virtual (Virtual-Circuit Service - VC):</h5>
+                    <p>
+                        Neste modelo, uma conexão (circuito virtual) é estabelecida entre os dois sistemas finais antes da transferência de dados. Durante o estabelecimento, os roteadores intermediários reservam recursos para a conexão, garantindo uma qualidade de serviço (QoS) para o tráfego. Todos os pacotes da mesma conexão VC seguem o mesmo caminho e chegam na ordem correta. As redes de telefonia são um exemplo clássico de comutação de circuitos, que têm semelhanças com o serviço de circuito virtual.
+                    </p>
+                </li>
+            </ul>
+            <p>
+                A Internet usa o serviço de datagrama (sem conexão na camada de rede), enquanto outras redes (como X.25, ATM) usaram ou usam circuitos virtuais. A Internet preferiu o serviço de datagrama por sua simplicidade e robustez: roteadores não precisam manter "estado" de conexão para cada fluxo de dados, tornando-os mais escaláveis e resilientes a falhas.
+            </p>
+        </section>
+
+        <section id="roteadores" class="chapter-section">
+            <h3>Roteadores: Os Guardiões do Tráfego</h3>
+            <p>
+                Um roteador é o dispositivo chave na camada de rede, responsável pelo repasse de pacotes entre diferentes redes. Ele possui duas funções principais:
+            </p>
+            <ul>
+                <li>
+                    <strong>Plano de Controle:</strong> É o "cérebro" do roteador. Ele executa os algoritmos e protocolos de roteamento (como RIP, OSPF, BGP) que calculam as melhores rotas e preenchem as tabelas de repasse.
+                </li>
+                <li>
+                    <strong>Plano de Dados (Plano de Repasse):</strong> É o "corpo" do roteador, que realiza o trabalho de repasse de pacotes. Ele é implementado em hardware de alta velocidade e executa a função de repasse.
+                </li>
+            </ul>
+
+            <h4>Arquitetura de um Roteador</h4>
+            <p>
+                Um roteador moderno é composto por:
+            </p>
+            <ul>
+                <li>
+                    <h5>Portas de Entrada:</h5>
+                    <p>
+                        Aqui chegam os pacotes dos enlaces de entrada. A porta de entrada realiza:
+                        <ul>
+                            <li><strong>Função da Camada Física:</strong> Terminação física do enlace de entrada.</li>
+                            <li><strong>Função da Camada de Enlace:</strong> Processamento do protocolo de enlace de dados (ex: Ethernet).</li>
+                            <li><strong>Função de Consulta de Repasse:</strong> A mais importante. A porta de entrada pesquisa a tabela de repasse para determinar a porta de saída. Isso deve ser feito muito rapidamente para não atrasar o pacote.</li>
+                            <li><strong>Fila de Entrada:</strong> Buffer onde os pacotes esperam se a comutação (transição para a porta de saída) não for rápida o suficiente. Pode ocorrer perda de pacote (head-of-line blocking).</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <h5>Malha de Comutação (Switching Fabric):</h5>
+                    <p>
+                        É o componente central do roteador que conecta as portas de entrada às portas de saída. É a "autoestrada interna" que move pacotes de um buffer de entrada para um buffer de saída. Existem três tipos principais de comutação:
+                        <ul>
+                            <li><strong>Via Memória:</strong> Roteadores mais antigos, onde a CPU move pacotes entre buffers na memória. Lento.</li>
+                            <li><strong>Via Barramento:</strong> Todas as portas compartilham um barramento comum. Mais rápido que a memória, mas o barramento pode ser um gargalo.</li>
+                            <li><strong>Via Interconexão (Crossbar):</strong> Matriz de interconexão que permite que múltiplas portas transfiram pacotes em paralelo, com alta capacidade. Mais complexo e caro.</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <h5>Portas de Saída:</h5>
+                    <p>
+                        Aqui os pacotes são enviados para os enlaces de saída. A porta de saída armazena os pacotes que chegam da malha de comutação em um buffer de fila.
+                        <ul>
+                            <li><strong>Fila de Saída:</strong> Buffer onde os pacotes esperam sua vez para serem transmitidos pelo enlace de saída. Se o enlace de saída estiver congestionado, esta fila pode transbordar, causando perda de pacotes. O gerenciamento de filas (descartar pacotes, agendamento de pacotes) é importante aqui.</li>
+                            <li><strong>Função da Camada de Enlace:</strong> Processamento do protocolo de enlace de dados.</li>
+                            <li><strong>Função da Camada Física:</strong> Transmissão de bits para o enlace de saída.</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <h5>Processador de Roteamento:</h5>
+                    <p>
+                        Executa os protocolos e algoritmos de roteamento, mantém as tabelas de repasse e gerencia os componentes do roteador. Opera no plano de controle.
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="protocolo-ip" class="chapter-section">
+            <h3>Protocolo IP: O Endereço da Internet</h3>
+            <p>
+                O <strong>Internet Protocol (IP)</strong> é o protocolo de camada de rede central da Internet. Ele define o formato dos datagramas e como os roteadores devem repassá-los.
+            </p>
+
+            <h4>O Datagrama IPv4</h4>
+            <p>
+                Um datagrama IPv4 é a unidade fundamental de dados que viaja na camada de rede. Ele tem um cabeçalho fixo de 20 bytes (sem opções), mais o tamanho variável das opções e os dados (payload) que vêm da camada de transporte.
+                <pre>
++------------------------------------+
+| Versão | HLEN | Tipo de Serviço | Comprimento Total    |
++------------------------------------+
+| Identificação     | Flags | Deslocamento do Fragmento |
++------------------------------------+
+| Tempo de Vida (TTL)| Protocolo | Checksum do Cabeçalho |
++------------------------------------+
+|                Endereço IP de Origem                |
++------------------------------------+
+|               Endereço IP de Destino                |
++------------------------------------+
+|              Opções (variável)                     |
++------------------------------------+
+|             Dados (Payload)                        |
+|                                    |
++------------------------------------+
+                </pre>
+                <ul>
+                    <li><strong>Versão:</strong> 4 (para IPv4).</li>
+                    <li><strong>HLEN (Header Length):</strong> Comprimento do cabeçalho em múltiplos de 4 bytes.</li>
+                    <li><strong>Tipo de Serviço (Type of Service - QoS):</strong> Obsoleto, mas historicamente usado para indicar prioridade ou tipo de serviço desejado.</li>
+                    <li><strong>Comprimento Total:</strong> Tamanho total do datagrama em bytes (cabeçalho + dados).</li>
+                    <li><strong>Identificação, Flags, Deslocamento do Fragmento:</strong> Usados para fragmentação/remontagem de datagramas, caso ele seja maior que o MTU (Maximum Transmission Unit) de um enlace.</li>
+                    <li><strong>Tempo de Vida (TTL - Time-To-Live):</strong> Um contador que é decrementado a cada roteador. Se chegar a zero, o datagrama é descartado, evitando loops infinitos na rede.</li>
+                    <li><strong>Protocolo:</strong> Indica o protocolo da camada de transporte para o qual o payload deve ser entregue (ex: 6 para TCP, 17 para UDP).</li>
+                    <li><strong>Checksum do Cabeçalho:</strong> Para detectar erros apenas no cabeçalho.</li>
+                    <li><strong>Endereço IP de Origem/Destino:</strong> Os endereços IP de 32 bits dos hospedeiros remetente e destinatário.</li>
+                    <li><strong>Opções:</strong> Campos opcionais para funções especiais (ex: gravação de rota, carimbo de tempo). Raramente usados.</li>
+                </ul>
+            </p>
+
+            <h4>Endereçamento IPv4</h4>
+            <p>
+                Um <strong>endereço IP</strong> é um identificador único de 32 bits para uma interface em um hospedeiro ou roteador. Uma interface é o ponto de conexão física de um dispositivo com um enlace.
+            </p>
+            <ul>
+                <li>
+                    <h5>Sub-redes (Subnets):</h5>
+                    <p>
+                        Uma <strong>sub-rede</strong> é um grupo de interfaces de hospedeiros e roteadores que têm a mesma porção de prefixo em seu endereço IP e podem se alcançar sem passar por um roteador. Elas formam redes IP independentes. O endereço IP consiste em duas partes: um <strong>ID de sub-rede</strong> (prefixo) e um <strong>ID de hospedeiro</strong>.
+                    </p>
+                </li>
+                <li>
+                    <h5>Classless Inter-Domain Routing (CIDR - Roteamento Entre Domínios Sem Classe):</h5>
+                    <p>
+                        Substituiu o endereçamento IP baseado em classes (A, B, C). O CIDR usa a notação <code>a.b.c.d/x</code>, onde <code>x</code> é o número de bits do prefixo da rede (ou ID de sub-rede). Isso permite maior flexibilidade na alocação de endereços IP, pois os blocos podem ter tamanhos mais variados.
+                    </p>
+                </li>
+                <li>
+                    <h5>Obtenção de Endereços IP (DHCP):</h5>
+                    <p>
+                        O <strong>DHCP (Dynamic Host Configuration Protocol)</strong> permite que hospedeiros obtenham endereços IP automaticamente quando se conectam a uma rede.
+                        <ul>
+                            <li><strong>Descoberta DHCP:</strong> Cliente envia uma mensagem "DHCP discover" (broadcast).</li>
+                            <li><strong>Oferta DHCP:</strong> Servidor DHCP responde com uma "DHCP offer" (endereço IP, máscara de sub-rede, gateway padrão, tempo de vida da concessão).</li>
+                            <li><strong>Requisição DHCP:</strong> Cliente solicita o endereço IP oferecido.</li>
+                            <li><strong>ACK DHCP:</strong> Servidor confirma a concessão do endereço IP.</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <h5>Network Address Translation (NAT - Tradução de Endereços de Rede):</h5>
+                    <p>
+                        Para economizar endereços IPv4 públicos (que estão se esgotando), muitas redes locais usam endereços IP privados (não roteáveis na Internet pública) e um dispositivo NAT (geralmente o roteador doméstico) para traduzi-los para um único endereço IP público ao se comunicar com a Internet externa. O dispositivo NAT mantém uma tabela de tradução para mapear requisições e respostas de volta aos hospedeiros internos.
+                    </p>
+                </li>
+                <li>
+                    <h5>IPv6:</h5>
+                    <p>
+                        A próxima geração do Protocolo IP, com endereços de 128 bits, resolve o problema de escassez de endereços IPv4. Além de mais endereços, o IPv6 simplifica o cabeçalho do datagrama e oferece outras melhorias. A transição do IPv4 para o IPv6 está em andamento, mas é lenta devido à vasta infraestrutura IPv4 existente. Técnicas como <strong>tunelamento</strong> são usadas para encapsular datagramas IPv6 em datagramas IPv4 para travessia de redes IPv4.
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="icmp" class="chapter-section">
+            <h3>ICMP (Internet Control Message Protocol)</h3>
+            <p>
+                O <strong>ICMP (Internet Control Message Protocol)</strong> é um protocolo de camada de rede usado pelos hospedeiros e roteadores para comunicar informações de controle ou mensagens de erro. É como o "sistema de feedback" da camada de rede.
+            </p>
+            <ul>
+                <li>O ICMP é transportado dentro de datagramas IP.</li>
+                <li>Mensagens ICMP incluem tipo e código, além de informações sobre o erro (ex: parte do datagrama IP que causou o erro).</li>
+                <li>Exemplos de uso:
+                    <ul>
+                        <li><strong>Echo Request/Reply (Ping):</strong> Usado para verificar a conectividade entre dois hospedeiros.</li>
+                        <li><strong>Destination Unreachable:</strong> Informa que um datagrama não pôde ser entregue a um destino.</li>
+                        <li><strong>Time Exceeded:</strong> Enviado quando o TTL de um datagrama chega a zero (usado pelo Traceroute).</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section id="algoritmos-de-roteamento" class="chapter-section">
+            <h3>Algoritmos de Roteamento</h3>
+            <p>
+                Os algoritmos de roteamento são a "inteligência" do plano de controle, determinando o caminho que os pacotes devem seguir da origem ao destino. Eles preenchem as tabelas de repasse nos roteadores.
+            </p>
+            <ul>
+                <li>
+                    <h4>Algoritmos de Roteamento Global (Link-State - LS):</h4>
+                    <p>
+                        Todos os roteadores têm informações completas sobre a topologia da rede e os custos de cada enlace. Cada roteador calcula o caminho de menor custo para todos os destinos.
+                    </p>
+                    <ul>
+                        <li>
+                            <strong>Algoritmo de Dijkstra:</strong> É o algoritmo mais comum para roteamento de estado de enlace.
+                            <ol>
+                                <li>Cada nó (roteador) difunde o "estado de seus enlaces" (seus custos para seus vizinhos diretos) para todos os outros nós na rede.</li>
+                                <li>Cada nó então constrói um mapa completo da rede (gráfico).</li>
+                                <li>Com base nesse mapa, cada nó usa o algoritmo de Dijkstra para calcular o caminho de menor custo de si mesmo para todos os outros nós.</li>
+                            </ol>
+                        </li>
+                        <li><strong>Vantagens:</strong> Convergência rápida, sem loops de roteamento.</li>
+                        <li><strong>Desvantagens:</strong> Mais complexo (exige mais recursos computacionais), vulnerável a erros de difusão de estado.</li>
+                    </ul>
+                </li>
+                <li>
+                    <h4>Algoritmos de Roteamento Descentralizado (Distance-Vector - DV):</h4>
+                    <p>
+                        Cada roteador só conhece os custos dos enlaces para seus vizinhos diretos. Ele troca informações com seus vizinhos sobre as distâncias estimadas para todos os destinos e atualiza suas próprias estimativas. O processo é iterativo.
+                    </p>
+                    <ul>
+                        <li>
+                            <strong>Equação de Bellman-Ford:</strong> A base do algoritmo de vetor de distância. A distância de um nó `x` para um destino `y` através de um vizinho `v` é o custo do enlace `x` a `v` somado à distância de `v` a `y`. O nó `x` escolhe o vizinho `v` que minimiza essa soma.
+                        </li>
+                        <li><strong>Vantagens:</strong> Menos complexo de implementar, menor sobrecarga de mensagens.</li>
+                        <li><strong>Desvantagens:</strong> Convergência mais lenta ("contagem até o infinito" se houver falhas), pode gerar loops de roteamento temporários.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section id="roteamento-na-internet" class="chapter-section">
+            <h3>Roteamento na Internet</h3>
+            <p>
+                A Internet é grande demais para um único algoritmo de roteamento. Ela é organizada em **Sistemas Autônomos (AS - Autonomous Systems)**. Um AS é um grupo de roteadores sob a mesma administração.
+            </p>
+            <ul>
+                <li>
+                    <h4>Roteamento Intra-AS (Interior Gateway Protocols - IGPs):</h4>
+                    <p>
+                        Algoritmos que roteiam pacotes dentro de um mesmo Sistema Autônomo.
+                        <ul>
+                            <li><strong>RIP (Routing Information Protocol):</strong> Algoritmo de vetor de distância mais antigo, usa "contagem de saltos" como métrica. Máximo de 15 saltos. Simples, mas limitado.</li>
+                            <li><strong>OSPF (Open Shortest Path First):</strong> Algoritmo de estado de enlace (Dijkstra), mais moderno e amplamente usado. Permite hierarquia dentro do AS (áreas) para escalabilidade. Usa custos de enlace.</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <h4>Roteamento Inter-AS (Exterior Gateway Protocols - EGPs):</h4>
+                    <p>
+                        Algoritmos que roteiam pacotes entre diferentes Sistemas Autônomos.
+                        <ul>
+                            <li>
+                                <strong>BGP (Border Gateway Protocol):</strong> O protocolo de roteamento inter-AS padrão da Internet.
+                                <ul>
+                                    <li>Pares BGP (roteadores na borda de ASs) trocam informações de alcançabilidade de prefixos (blocos de endereços IP) e os caminhos de ASs para alcançar esses prefixos.</li>
+                                    <li>Permite que cada AS defina suas próprias políticas de roteamento (ex: não rotear tráfego por um AS concorrente, priorizar rotas mais baratas).</li>
+                                    <li>Baseado em "políticas", não apenas em custos de caminho.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="resumo-capitulo" class="chapter-section">
+            <h3>Resumo do Capítulo</h3>
+            <p>
+                Neste capítulo, fizemos uma profunda imersão na <strong>Camada de Rede</strong>, entendendo seu papel fundamental no encaminhamento de pacotes de um hospedeiro a outro. Diferenciamos os modelos de serviço de datagrama (usado na Internet) e circuito virtual, e exploramos a arquitetura interna de um roteador, desde suas portas de entrada/saída até a malha de comutação e o processador de roteamento.
+            </p>
+            <p>
+                Aprofundamos no coração da camada de rede com o <strong>Protocolo IP</strong> (IPv4 e IPv6), analisando o formato dos datagramas e os desafios do endereçamento. Discutimos também o papel do <strong>ICMP</strong> como protocolo de controle e mensagens de erro.
+            </p>
+            <p>
+                Por fim, desvendamos os complexos <strong>algoritmos de roteamento</strong> (estado de enlace e vetor de distância) e como eles são aplicados na prática na Internet, com os protocolos <strong>intra-AS</strong> (RIP, OSPF) e o poderoso protocolo <strong>inter-AS</strong>, o BGP.
+            </p>
+            <p>
+                Compreender a camada de rede é essencial para entender como a Internet funciona em sua escala global, garantindo que bilhões de pacotes cheguem aos seus destinos diariamente. No próximo capítulo, subiremos para a camada de enlace, que lida com a comunicação entre nós adjacentes.
+            </p>
+        </section>
+
+        <section id="atividades" class="chapter-section">
+            <h3>Atividades de Aprendizagem</h3>
+            <p>Teste seus conhecimentos sobre o Capítulo 4 com as seguintes perguntas de múltipla escolha:</p>
+
+            <!-- Questão 1 -->
+            <div class="question-block">
+                <p>1. Qual é a principal diferença entre a função de repasse (forwarding) e a função de roteamento (routing) na camada de rede?</p>
+                <label>
+                    <input type="radio" name="q1_ch4" value="a"> A) Repasse determina a rota completa, enquanto roteamento move pacotes de uma interface para outra.
+                </label>
+                <label>
+                    <input type="radio" name="q1_ch4" value="b"> B) Repasse é uma ação local do roteador; roteamento é um processo global de determinação de rotas.
+                </label>
+                <label>
+                    <input type="radio" name="q1_ch4" value="c"> C) Repasse ocorre na camada de transporte, e roteamento na camada de rede.
+                </label>
+                <label>
+                    <input type="radio" name="q1_ch4" value="d"> D) Ambas as funções são idênticas e interligadas.
+                </label>
+                <button class="check-button" onclick="checkAnswer('q1_ch4', 'b', 'feedback1_ch4')">Verificar Resposta</button>
+                <div class="feedback" id="feedback1_ch4"></div>
+            </div>
+
+            <!-- Questão 2 -->
+            <div class="question-block">
+                <p>2. Qual componente da arquitetura de um roteador é responsável por executar os algoritmos e protocolos de roteamento e manter as tabelas de repasse?</p>
+                <label>
+                    <input type="radio" name="q2_ch4" value="a"> A) Porta de Entrada
+                </label>
+                <label>
+                    <input type="radio" name="q2_ch4" value="b"> B) Malha de Comutação
+                </label>
+                <label>
+                    <input type="radio" name="q2_ch4" value="c"> C) Porta de Saída
+                </label>
+                <label>
+                    <input type="radio" name="q2_ch4" value="d"> D) Processador de Roteamento
+                </label>
+                <button class="check-button" onclick="checkAnswer('q2_ch4', 'd', 'feedback2_ch4')">Verificar Resposta</button>
+                <div class="feedback" id="feedback2_ch4"></div>
+            </div>
+
+            <!-- Questão 3 -->
+            <div class="question-block">
+                <p>3. No cabeçalho de um datagrama IPv4, qual campo é decrementado a cada roteador e, se chegar a zero, causa o descarte do datagrama?</p>
+                <label>
+                    <input type="radio" name="q3_ch4" value="a"> A) Comprimento Total
+                </label>
+                <label>
+                    <input type="radio" name="q3_ch4" value="b"> B) Identificação
+                </label>
+                <label>
+                    <input type="radio" name="q3_ch4" value="c"> C) Tempo de Vida (TTL)
+                </label>
+                <label>
+                    <input type="radio" name="q3_ch4" value="d"> D) Checksum do Cabeçalho
+                </label>
+                <button class="check-button" onclick="checkAnswer('q3_ch4', 'c', 'feedback3_ch4')">Verificar Resposta</button>
+                <div class="feedback" id="feedback3_ch4"></div>
+            </div>
+
+            <!-- Questão 4 -->
+            <div class="question-block">
+                <p>4. Qual algoritmo de roteamento intra-AS é um algoritmo de vetor de distância que usa "contagem de saltos" como métrica e tem um limite máximo de 15 saltos?</p>
+                <label>
+                    <input type="radio" name="q4_ch4" value="a"> A) OSPF (Open Shortest Path First)
+                </label>
+                <label>
+                    <input type="radio" name="q4_ch4" value="b"> B) BGP (Border Gateway Protocol)
+                </label>
+                <label>
+                    <input type="radio" name="q4_ch4" value="c"> C) RIP (Routing Information Protocol)
+                </label>
+                <label>
+                    <input type="radio" name="q4_ch4" value="d"> D) Algoritmo de Dijkstra
+                </label>
+                <button class="check-button" onclick="checkAnswer('q4_ch4', 'c', 'feedback4_ch4')">Verificar Resposta</button>
+                <div class="feedback" id="feedback4_ch4"></div>
+            </div>
+
+            <!-- Questão 5 -->
+            <div class="question-block">
+                <p>5. O que o protocolo DHCP permite que os hospedeiros façam ao se conectar a uma rede?</p>
+                <label>
+                    <input type="radio" name="q5_ch4" value="a"> A) Traduzir nomes de hospedeiro para endereços IP.
+                </label>
+                <label>
+                    <input type="radio" name="q5_ch4" value="b"> B) Obter endereços IP automaticamente.
+                </label>
+                <label>
+                    <input type="radio" name="q5_ch4" value="c"> C) Fragmentar e remontar datagramas IP.
+                </label>
+                <label>
+                    <input type="radio" name="q5_ch4" value="d"> D) Estabelecer conexões confiáveis entre processos.
+                </label>
+                <button class="check-button" onclick="checkAnswer('q5_ch4', 'b', 'feedback5_ch4')">Verificar Resposta</button>
+                <div class="feedback" id="feedback5_ch4"></div>
+            </div>
+        </section>
+
+        <div class="chapter-navigation-buttons">
+            <a href="capitulo3.html" class="back-button">← Capítulo Anterior</a>
+            <a href="capitulo5.html" class="back-button">Próximo Capítulo →</a>
+        </div>
+    </main>
+
+    <!-- Rodapé do Site -->
+    <footer id="contato">
+        <div class="container">
+            <p>&copy; 2025 Desvendando as Redes. Todos os direitos reservados.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script>
+        function checkAnswer(questionName, correctAnswer, feedbackId) {
+            const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+            const feedbackElement = document.getElementById(feedbackId);
+
+            if (selectedOption) {
+                if (selectedOption.value === correctAnswer) {
+                    feedbackElement.textContent = "Correto! 🎉";
+                    feedbackElement.className = "feedback correct";
+                } else {
+                    feedbackElement.textContent = "Incorreto. Tente novamente!";
+                    feedbackElement.className = "feedback incorrect";
+                }
+            } else {
+                feedbackElement.textContent = "Por favor, selecione uma opção.";
+                feedbackElement.className = "feedback incorrect";
+            }
+        }
+    </script>
+    <!-- Vincula o arquivo JavaScript externo (mesmo que vazio, mantém a estrutura) -->
+    <script src="script.js"></script>
+</body>
+</html>

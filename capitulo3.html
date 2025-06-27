@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 3: Camada de Transporte</title>
+   
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="capitulos.css">
+    
+</head>
+<body>
+    
+    <header>
+        <div class="container">
+            <h1>Desvendando as Redes</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html#inicio">Início</a></li>
+                    <li><a href="index.html#jornada">Nossa Jornada</a></li>
+                    <li><a href="index.html#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+       
+        <div class="chapter-navigation-buttons">
+            <a href="index.html" class="back-button">← Início</a>
+            <a href="capitulo2.html" class="back-button">← Capítulo Anterior</a>
+            <a href="capitulo4.html" class="back-button">Próximo Capítulo →</a>
+        </div>
+
+        
+        <section class="chapter-progress">
+            <h3>Progresso da Jornada</h3>
+            <div class="progress-indicator">
+                <a href="capitulo1.html" class="chapter-dot completed" data-chapter="1">1</a>
+                <a href="capitulo2.html" class="chapter-dot completed" data-chapter="2">2</a>
+                <a href="capitulo3.html" class="chapter-dot completed current-chapter" data-chapter="3">3</a>
+                <a href="capitulo4.html" class="chapter-dot" data-chapter="4">4</a>
+                <a href="capitulo5.html" class="chapter-dot" data-chapter="5">5</a>
+                <a href="capitulo6.html" class="chapter-dot" data-chapter="6">6</a>
+                <a href="capitulo7.html" class="chapter-dot" data-chapter="7">7</a>
+                <a href="capitulo8.html" class="chapter-dot" data-chapter="8">8</a>
+                <a href="capitulo9.html" class="chapter-dot" data-chapter="9">9</a>
+            </div>
+            <p>Capítulos concluídos: <span id="completed-count">3</span> de <span id="total-chapters">9</span></p>
+        </section>
+
+        <section id="capitulo-intro" class="chapter-section">
+            <h2>Camada de Transporte</h2>
+            <p>
+                No capítulo anterior, exploramos a camada de aplicação, onde as interações entre usuários e a Internet ganham vida. Agora, vamos descer um degrau na pilha de protocolos e mergulhar na <strong>Camada de Transporte</strong>. Imagine que a camada de aplicação é o aplicativo que você usa (como um navegador ou e-mail), e a camada de transporte é o "serviço de entrega" que esses aplicativos utilizam.
+            </p>
+            <p>
+                A principal função da camada de transporte é fornecer uma comunicação lógica entre <strong>processos</strong> em diferentes sistemas finais. Embora os sistemas finais estejam conectados por uma rede de roteadores (camada de rede), são os processos (seus programas em execução) que realmente querem se comunicar. A camada de transporte estabelece essa comunicação "de processo para processo", usando os serviços da camada de rede para mover pacotes entre hospedeiros.
+            </p>
+            <p>
+                Neste capítulo, vamos focar nos dois principais protocolos da camada de transporte da Internet: o <strong>UDP (User Datagram Protocol)</strong> e o <strong>TCP (Transmission Control Protocol)</strong>. Entenderemos como eles funcionam, suas diferenças cruciais e como cada um se adapta a diferentes tipos de aplicações de rede.
+            </p>
+        </section>
+
+        <section id="introducao-servicos-camada-transporte" class="chapter-section">
+            <h3>Introdução e Serviços da Camada de Transporte</h3>
+            <p>
+                A camada de transporte está localizada entre a camada de aplicação (que fornece dados para a rede) e a camada de rede (que move os dados entre hospedeiros).
+            </p>
+            <ul>
+                <li>
+                    <h4>Multiplexação e Demultiplexação:</h4>
+                    <p>
+                        No hospedeiro remetente, a camada de transporte coleta mensagens de diferentes processos da camada de aplicação, adiciona cabeçalhos e passa para a camada de rede. Isso é a <strong>multiplexação</strong>. No hospedeiro destinatário, a camada de transporte recebe os segmentos da camada de rede e entrega os dados ao processo de aplicação correto. Isso é a <strong>demultiplexação</strong>.
+                    </p>
+                    <p>
+                        Imagine um aeroporto: vários passageiros (processos) chegam para voos diferentes (aplicativos). A equipe do check-in (multiplexação) os direciona para o avião certo. Ao chegar, a equipe de desembarque (demultiplexação) direciona cada passageiro para seu terminal de destino.
+                    </p>
+                    <p>
+                        Como a demultiplexação funciona? Cada segmento de transporte tem campos de <strong>porta de origem</strong> e <strong>porta de destino</strong>. Esses números de porta (lembra-se deles do Capítulo 2?) são usados para identificar o processo de aplicação. O hospedeiro de destino usa o endereço IP de destino e o número da porta de destino para entregar o segmento ao socket correto, que por sua vez o entrega ao processo correto.
+                    </p>
+                </li>
+                <li>
+                    <h4>Transferência Confiável de Dados:</h4>
+                    <p>
+                        A camada de transporte pode fornecer um serviço de transferência de dados confiável, mesmo que a camada de rede subjacente não seja confiável (ou seja, possa perder, corromper ou duplicar pacotes). Isso é crucial para aplicações que não toleram perdas, como FTP, HTTP, SMTP e DNS (que usa TCP para transferências de grandes zonas, embora use UDP para consultas básicas).
+                    </p>
+                    <p>
+                        A ideia é usar técnicas como:
+                        <ul>
+                            <li><strong>Checksums:</strong> Para detectar erros nos bits.</li>
+                            <li><strong>Timers:</strong> Para retransmitir dados se não houver confirmação em tempo.</li>
+                            <li><strong>Sequence Numbers (Números de Sequência):</strong> Para detectar perdas e reordenações.</li>
+                            <li><strong>Acknowledgements (ACKs - Confirmações):</strong> O receptor envia uma mensagem confirmando o recebimento.</li>
+                            <li><strong>Negative Acknowledgements (NAKs - Confirmações Negativas):</strong> O receptor informa que um dado está corrompido ou faltando.</li>
+                            <li><strong>Retransmissão:</strong> O remetente envia novamente dados que foram perdidos ou corrompidos.</li>
+                        </ul>
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="protocolo-udp" class="chapter-section">
+            <h3>Protocolo UDP (User Datagram Protocol)</h3>
+            <p>
+                O UDP é o protocolo de transporte mais simples e rápido da Internet. Ele oferece um serviço minimalista, quase um "envio sem pensar".
+            </p>
+            <ul>
+                <li>
+                    <h4>Não Orientado à Conexão:</h4>
+                    <p>
+                        Não há "apresentação" (handshaking) antes de enviar dados. Um processo UDP envia um segmento a outro sem qualquer comunicação preliminar ou garantia de que o receptor está pronto. É como jogar uma garrafa com uma mensagem no oceano – você a joga, mas não sabe se ela chegará.
+                    </p>
+                </li>
+                <li>
+                    <h4>Não Confiável:</h4>
+                    <p>
+                        O UDP não garante a entrega, a ordem ou a ausência de duplicação dos segmentos. Se um segmento UDP for perdido na rede, o UDP não o retransmite. A aplicação precisa lidar com a confiabilidade, se necessário.
+                    </p>
+                </li>
+                <li>
+                    <h4>Sem Controle de Congestionamento:</h4>
+                    <p>
+                        O UDP não tenta evitar sobrecarregar a rede. Ele envia os dados na taxa que a aplicação quiser, mesmo que isso cause congestionamento e perdas.
+                    </p>
+                </li>
+                <li>
+                    <h4>Vantagens do UDP:</h4>
+                    <ul>
+                        <li><strong>Controle Fino sobre o Que e Quando Enviar:</strong> A aplicação tem mais controle direto.</li>
+                        <li><strong>Sem Estabelecimento de Conexão:</strong> Menor atraso de configuração.</li>
+                        <li><strong>Sem Manutenção de Estado de Conexão:</strong> O servidor não precisa alocar recursos para cada cliente, permitindo mais clientes simultâneos.</li>
+                        <li><strong>Menor Sobrecarga de Cabeçalho:</strong> O cabeçalho UDP tem apenas 8 bytes, contra 20 bytes (ou mais) do TCP.</li>
+                    </ul>
+                </li>
+                <li>
+                    <h4>Aplicações Típicas do UDP:</h4>
+                    <p>
+                        Geralmente usado em aplicações onde a velocidade e a sensibilidade ao atraso são mais importantes que a confiabilidade total, ou onde a própria aplicação implementa sua confiabilidade:
+                        <ul>
+                            <li>Streaming de vídeo e áudio em tempo real (ex: chamadas de VoIP, jogos online) - pequenas perdas são toleráveis.</li>
+                            <li>DNS (consultas de nome, embora use TCP para grandes transferências de zona).</li>
+                            <li>SNMP (Simple Network Management Protocol).</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <h4>Formato do Segmento UDP:</h4>
+                    <p>
+                        Um segmento UDP é muito simples, contendo apenas um cabeçalho de 8 bytes, seguido pelos dados da aplicação.
+                        <pre>
++----------------+----------------+
+| Porta de Origem| Porta de Destino|
++----------------+----------------+
+| Comprimento   | Checksum       |
++----------------+----------------+
+|         Dados da Aplicação       |
+|                                 |
++---------------------------------+
+                        </pre>
+                        <ul>
+                            <li><strong>Porta de Origem/Destino:</strong> Identificam os processos de aplicação.</li>
+                            <li><strong>Comprimento:</strong> Tamanho total do segmento UDP em bytes (cabeçalho + dados).</li>
+                            <li><strong>Checksum:</strong> Usado para detectar erros (bits invertidos) no segmento. É opcional, mas frequentemente usado. Se um erro for detectado, o UDP pode descartar o segmento ou passá-lo para a aplicação com um aviso.</li>
+                        </ul>
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="protocolo-tcp" class="chapter-section">
+            <h3>Protocolo TCP (Transmission Control Protocol)</h3>
+            <p>
+                O TCP é o protocolo de transporte mais complexo e robusto da Internet, oferecendo um serviço de transferência de dados confiável e orientado à conexão.
+            </p>
+            <ul>
+                <li>
+                    <h4>Orientado à Conexão:</h4>
+                    <p>
+                        Antes de trocar dados, TCP cliente e servidor devem estabelecer uma conexão através de uma "apresentação de três vias" (three-way handshake). Após a troca de dados, a conexão é encerrada.
+                    </p>
+                </li>
+                <li>
+                    <h4>Transferência Confiável de Dados:</h4>
+                    <p>
+                        O TCP garante que os dados enviados pelo processo remetente sejam entregues ao processo receptor na ordem correta e sem perdas ou corrupções. Ele faz isso usando:
+                        <ul>
+                            <li><strong>Números de Sequência:</strong> Para ordenar os segmentos e detectar segmentos perdidos ou duplicados.</li>
+                            <li><strong>Confirmações (ACKs):</strong> O receptor envia ACKs para indicar que recebeu segmentos sem erro.</li>
+                            <li><strong>Timers (Temporizadores):</strong> O remetente inicia um timer para cada segmento enviado. Se o timer expirar antes de receber um ACK, o segmento é retransmitido.</li>
+                            <li><strong>Checksums:</strong> Para detectar corrupção de bits.</li>
+                        </ul>
+                    </p>
+                </li>
+                <li>
+                    <h4>Controle de Fluxo:</h4>
+                    <p>
+                        O TCP impede que um remetente rápido sobrecarregue um receptor lento. O receptor TCP informa ao remetente o tamanho de seu buffer livre (janela de recepção), e o remetente ajusta sua taxa para não exceder a capacidade do receptor.
+                    </p>
+                </li>
+                <li>
+                    <h4>Controle de Congestionamento:</h4>
+                    <p>
+                        O TCP tenta evitar sobrecarregar a rede, ajustando a taxa de transmissão da aplicação para evitar o colapso do sistema de comutação de pacotes. Se o TCP detecta congestionamento (por exemplo, por perdas de pacotes ou atrasos crescentes), ele reduz sua taxa de envio. O objetivo é compartilhar a largura de banda da rede de forma "justa" entre as conexões TCP.
+                    </p>
+                </li>
+                <li>
+                    <h4>Serviço Full-Duplex:</h4>
+                    <p>
+                        Dados podem fluir em ambas as direções simultaneamente através da mesma conexão TCP.
+                    </p>
+                </li>
+                <li>
+                    <h4>Orientado a Stream de Bytes:</h4>
+                    <p>
+                        TCP não vê os dados como segmentos individuais, mas como um fluxo contínuo de bytes. Isso significa que o TCP pode juntar pequenos blocos de dados da aplicação em um segmento maior para transmissão, ou dividir grandes blocos em múltiplos segmentos.
+                    </p>
+                </li>
+                <li>
+                    <h4>Formato do Segmento TCP:</h4>
+                    <p>
+                        Um segmento TCP possui um cabeçalho mais complexo (20 bytes fixos, mais opções), seguido pelos dados da aplicação.
+                        <pre>
++----------------+----------------+
+| Porta de Origem| Porta de Destino|
++----------------+----------------+
+|           Número de Sequência     |
++---------------------------------+
+|           Número de Confirmação   |
++---------------------------------+
+|Desloc. | Res.  | UAPRSF| Janela de |
+|Dados   |       | C KSTN| Recepção  |
++----------------+----------------+
+| Checksum       | Ponteiro Urgente|
++----------------+----------------+
+|             Opções (variável)     |
++---------------------------------+
+|         Dados da Aplicação       |
+|                                 |
++---------------------------------+
+                        </pre>
+                        <ul>
+                            <li><strong>Porta de Origem/Destino:</strong> Identificam os processos de aplicação.</li>
+                            <li><strong>Número de Sequência:</strong> Número do primeiro byte de dados no segmento.</li>
+                            <li><strong>Número de Confirmação (ACK):</strong> O próximo número de sequência esperado pelo receptor do remetente.</li>
+                            <li><strong>Comprimento do Cabeçalho (Deslocamento de Dados):</strong> Indica onde os dados da aplicação começam no segmento TCP.</li>
+                            <li><strong>Flags (UAPRSF):</strong> Diversos bits de controle (ex: SYN para estabelecimento de conexão, ACK para confirmação, FIN para encerramento).</li>
+                            <li><strong>Janela de Recepção:</strong> Usado para controle de fluxo, indicando o espaço de buffer livre no receptor.</li>
+                            <li><strong>Checksum:</strong> Para detecção de erros.</li>
+                            <li><strong>Ponteiro Urgente:</strong> Usado para indicar dados urgentes.</li>
+                            <li><strong>Opções:</strong> Campos opcionais (ex: MSS - Maximum Segment Size, para negociar o tamanho máximo do segmento).</li>
+                        </ul>
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="estabelecimento-e-encerramento-de-conexao-tcp" class="chapter-section">
+            <h3>Estabelecimento e Encerramento de Conexão TCP</h3>
+            <p>
+                O TCP utiliza o famoso "apresentação de três vias" para estabelecer uma conexão, garantindo que ambos os lados estejam prontos para enviar e receber dados.
+            </p>
+            <ol>
+                <li>
+                    <strong>Passo 1 (SYN):</strong> O cliente envia um segmento TCP especial com a flag SYN ligada (e um número de sequência inicial aleatório `client_isn`) para o servidor na porta de destino desejada.
+                </li>
+                <li>
+                    <strong>Passo 2 (SYNACK):</strong> O servidor recebe o SYN do cliente, aloca recursos para a conexão, e responde com um segmento SYNACK: a flag SYN está ligada, a flag ACK está ligada, o campo de confirmação (`client_isn + 1`) confirma o SYN do cliente, e o servidor inclui seu próprio número de sequência inicial aleatório (`server_isn`).
+                </li>
+                <li>
+                    <strong>Passo 3 (ACK):</strong> O cliente recebe o SYNACK do servidor, aloca recursos, e responde com um segmento ACK: a flag ACK está ligada, e o campo de confirmação (`server_isn + 1`) confirma o SYNACK do servidor. O primeiro segmento de dados do cliente pode ser incluído neste ACK.
+                </li>
+            </ol>
+            <p>
+                Para encerrar uma conexão, o TCP também usa uma sequência de "apresentação de duas vias" (four-way handshake, na verdade, duas vias em cada sentido):
+            </p>
+            <ol>
+                <li>O lado que quer fechar a conexão envia um segmento TCP com a flag FIN ligada.</li>
+                <li>O outro lado recebe o FIN, envia um ACK em resposta, e depois de um tempo (quando tiver terminado de enviar seus próprios dados pendentes) também envia um FIN.</li>
+                <li>O primeiro lado recebe o segundo FIN, envia um ACK final, e a conexão é completamente fechada.</li>
+            </ol>
+        </section>
+
+        <section id="resumo-capitulo" class="chapter-section">
+            <h3>Resumo do Capítulo</h3>
+            <p>
+                Neste capítulo, mergulhamos na <strong>Camada de Transporte</strong>, o coração da comunicação "de processo para processo" na Internet. Entendemos a importância da multiplexação e demultiplexação para entregar dados aos aplicativos corretos e exploramos os conceitos de transferência confiável de dados.
+            </p>
+            <p>
+                Detalhes foram dados sobre o <strong>UDP</strong>, o protocolo simples e rápido, ideal para aplicações que priorizam a velocidade sobre a confiabilidade. Em contraste, desvendamos o <strong>TCP</strong>, com seus serviços robustos de confiabilidade, controle de fluxo e controle de congestionamento, essenciais para a maioria das aplicações que exigem garantia de entrega. Vimos o formato dos segmentos de cada um e o processo de estabelecimento e encerramento de conexões TCP.
+            </p>
+            <p>
+                Compreender a camada de transporte é fundamental, pois ela serve de ponte entre o mundo das aplicações e a rede em si, garantindo que suas informações cheguem ao destino de forma eficaz. No próximo capítulo, desceremos ainda mais na pilha de protocolos para explorar a Camada de Rede, onde o roteamento e o endereçamento IP são os protagonistas.
+            </p>
+        </section>
+
+        <section id="atividades" class="chapter-section">
+            <h3>Atividades de Aprendizagem</h3>
+            <p>Teste seus conhecimentos sobre o Capítulo 3 com as seguintes perguntas de múltipla escolha:</p>
+
+            <!-- Questão 1 -->
+            <div class="question-block">
+                <p>1. Qual é a principal função da multiplexação na camada de transporte do hospedeiro remetente?</p>
+                <label>
+                    <input type="radio" name="q1_ch3" value="a"> A) Direcionar pacotes entre diferentes redes IP.
+                </label>
+                <label>
+                    <input type="radio" name="q1_ch3" value="b"> B) Entregar dados recebidos ao processo de aplicação correto no hospedeiro.
+                </label>
+                <label>
+                    <input type="radio" name="q1_ch3" value="c"> C) Coletar mensagens de diferentes processos de aplicação e adicionar cabeçalhos para passar à camada de rede.
+                </label>
+                <label>
+                    <input type="radio" name="q1_ch3" value="d"> D) Garantir que os dados cheguem ao destino na ordem correta e sem perdas.
+                </label>
+                <button class="check-button" onclick="checkAnswer('q1_ch3', 'c', 'feedback1_ch3')">Verificar Resposta</button>
+                <div class="feedback" id="feedback1_ch3"></div>
+            </div>
+
+            <!-- Questão 2 -->
+            <div class="question-block">
+                <p>2. Qual das seguintes características NÃO é um serviço provido pelo UDP?</p>
+                <label>
+                    <input type="radio" name="q2_ch3" value="a"> A) Não orientado à conexão.
+                </label>
+                <label>
+                    <input type="radio" name="q2_ch3" value="b"> B) Transferência de dados não confiável.
+                </label>
+                <label>
+                    <input type="radio" name="q2_ch3" value="c"> C) Controle de congestionamento.
+                </label>
+                <label>
+                    <input type="radio" name="q2_ch3" value="d"> D) Menor sobrecarga de cabeçalho.
+                </label>
+                <button class="check-button" onclick="checkAnswer('q2_ch3', 'c', 'feedback2_ch3')">Verificar Resposta</button>
+                <div class="feedback" id="feedback2_ch3"></div>
+            </div>
+
+            <!-- Questão 3 -->
+            <div class="question-block">
+                <p>3. Qual é o propósito da "apresentação de três vias" (three-way handshake) no TCP?</p>
+                <label>
+                    <input type="radio" name="q3_ch3" value="a"> A) Transmitir dados de forma não confiável e rápida.
+                </label>
+                <label>
+                    <input type="radio" name="q3_ch3" value="b"> B) Encerrar uma conexão TCP após a transferência de dados.
+                </label>
+                <label>
+                    <input type="radio" name="q3_ch3" value="c"> C) Estabelecer uma conexão confiável entre cliente e servidor antes da troca de dados.
+                </label>
+                <label>
+                    <input type="radio" name="q3_ch3" value="d"> D) Segmentar mensagens de aplicação em pacotes menores.
+                </label>
+                <button class="check-button" onclick="checkAnswer('q3_ch3', 'c', 'feedback3_ch3')">Verificar Resposta</button>
+                <div class="feedback" id="feedback3_ch3"></div>
+            </div>
+
+            <!-- Questão 4 -->
+            <div class="question-block">
+                <p>4. No contexto da transferência confiável de dados, o que o receptor TCP envia para indicar que recebeu segmentos sem erro?</p>
+                <label>
+                    <input type="radio" name="q4_ch3" value="a"> A) NAKs (Negative Acknowledgements)
+                </label>
+                <label>
+                    <input type="radio" name="q4_ch3" value="b"> B) Timers
+                </label>
+                <label>
+                    <input type="radio" name="q4_ch3" value="c"> C) Sequence Numbers
+                </label>
+                <label>
+                    <input type="radio" name="q4_ch3" value="d"> D) ACKs (Acknowledgements)
+                </label>
+                <button class="check-button" onclick="checkAnswer('q4_ch3', 'd', 'feedback4_ch3')">Verificar Resposta</button>
+                <div class="feedback" id="feedback4_ch3"></div>
+            </div>
+
+            <!-- Questão 5 -->
+            <div class="question-block">
+                <p>5. O que o TCP faz para impedir que um remetente rápido sobrecarregue um receptor lento?</p>
+                <label>
+                    <input type="radio" name="q5_ch3" value="a"> A) Aplica controle de congestionamento.
+                </label>
+                <label>
+                    <input type="radio" name="q5_ch3" value="b"> B) Utiliza o serviço não confiável do UDP.
+                </label>
+                <label>
+                    <input type="radio" name="q5_ch3" value="c"> C) Implementa controle de fluxo, informando o tamanho do buffer livre do receptor.
+                </label>
+                <label>
+                    <input type="radio" name="q5_ch3" value="d"> D) Descarta pacotes se o buffer do remetente estiver cheio.
+                </label>
+                <button class="check-button" onclick="checkAnswer('q5_ch3', 'c', 'feedback5_ch3')">Verificar Resposta</button>
+                <div class="feedback" id="feedback5_ch3"></div>
+            </div>
+        </section>
+
+        <div class="chapter-navigation-buttons">
+            <a href="capitulo2.html" class="back-button">← Capítulo Anterior</a>
+            <a href="capitulo4.html" class="back-button">Próximo Capítulo →</a>
+        </div>
+    </main>
+
+    <!-- Rodapé do Site -->
+    <footer id="contato">
+        <div class="container">
+            <p>&copy; 2025 Desvendando as Redes. Todos os direitos reservados.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script para verificar as respostas -->
+    <script>
+        function checkAnswer(questionName, correctAnswer, feedbackId) {
+            const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+            const feedbackElement = document.getElementById(feedbackId);
+
+            if (selectedOption) {
+                if (selectedOption.value === correctAnswer) {
+                    feedbackElement.textContent = "Correto! 🎉";
+                    feedbackElement.className = "feedback correct";
+                } else {
+                    feedbackElement.textContent = "Incorreto. Tente novamente!";
+                    feedbackElement.className = "feedback incorrect";
+                }
+            } else {
+                feedbackElement.textContent = "Por favor, selecione uma opção.";
+                feedbackElement.className = "feedback incorrect";
+            }
+        }
+    </script>
+    <!-- Vincula o arquivo JavaScript externo (mesmo que vazio, mantém a estrutura) -->
+    <script src="script.js"></script>
+</body>
+</html>

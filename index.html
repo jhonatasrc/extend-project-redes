@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redes de Computadores</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+
+</head>
+<body>
+    <!-- Cabeçalho Principal do Site -->
+    <header>
+        <div class="container">
+            <h1>Falando Sobre Redes de Computadores</h1>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="capitulo1.html">Primeiro Capítulo</a></li>
+                    <li><a href="#contato-form-section">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Seção de Herói - Introdução Principal -->
+    <section id="inicio" class="hero-section">
+        <div class="container">
+            <h2>Sua Jornada para o mundo das Redes de Computadores</h2>
+
+            <p>
+                <em> "Meu nome é Jhonatas e estou cursando Engenharia da Computação no Centro Universitário Internacional <a href="https://www.uninter.com/">UNINTER</a> e esse é meu projeto de Extensão do Curso!"</em>
+            </p>
+
+            <p>
+                Então sejam bem-vindos ao "Falando sobre Redes de Computadores"!
+                Aqui, você explorará de forma clara, didática e intuitiva os fundamentos, as tecnologias e o futuro das redes que conectam o nosso mundo digital.
+                Todo o conteúdo deste curso foi cuidadosamente elaborado com base na aclamada obra "<strong>Redes de Computadores e a Internet: Uma Abordagem Top-Down</strong>" (6ª edição, de Kurose & Ross), garantindo uma experiência de aprendizado aprofundada e alinhada com as melhores referências da área.
+                Prepare-se para desvendar a complexidade das redes passo a passo, com atividades práticas para fixar seu conhecimento e transformar sua compreensão sobre a infraestrutura da Internet.
+                
+            </p>
+            <a href="capitulo1.html" class="button">
+                Iniciar Jornada
+            </a>
+        </div>
+    </section>
+
+    <!-- Nova Seção de Contato com Formulário -->
+    <section id="contato-form-section" class="contact-form">
+        <h3>Entre em Contato Comigo</h3>
+        <p style="text-align: center; margin-bottom: 1.5rem; color: #4b5563;">
+            Tem alguma sugestão ou feedback? Envie-me uma mensagem diretamente pelo WhatsApp!
+        </p>
+        <form onsubmit="sendWhatsAppMessage(event)">
+            <div class="form-group">
+                <label for="name">Seu Nome:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Sua Mensagem:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="submit-button">Enviar Mensagem via WhatsApp</button>
+        </form>
+    </section>
+
+    <!-- Rodapé do Site -->
+    <footer id="contato">
+        <div class="container">
+            <p>&copy; 2025 Desvendando as Redes. Todos os direitos reservados.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script JavaScript para enviar mensagem via WhatsApp -->
+    <script>
+        function sendWhatsAppMessage(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            const name = document.getElementById('name').value;
+            const message = document.getElementById('message').value;
+
+            // NÚMERO DE TELEFONE PARA WHATSAPP - Substitua pelo seu número real (ex: 5521999999999 para Brasil, Rio de Janeiro)
+            const phoneNumber = '5522998175204'; 
+
+            let whatsappMessage = `Olá! Meu nome é ${name} e vim do site "Falando Sobre Redes de Computadores".\n\nMensagem: ${message}`;
+
+            // Codifica a mensagem para URL para que seja compatível com o link do WhatsApp
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+
+            // Constrói o URL da API do WhatsApp
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+
+            // Abre o link do WhatsApp em uma nova aba/janela
+            window.open(whatsappUrl, '_blank');
+
+            // Opcional: Limpar o formulário após o envio
+            document.getElementById('name').value = '';
+            document.getElementById('message').value = '';
+        }
+    </script>
+    <!-- Vincula o arquivo JavaScript externo (mesmo que vazio, mantém a estrutura) -->
+    <script src="script.js"></script>
+</body>
+</html>
