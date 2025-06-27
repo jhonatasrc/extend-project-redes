@@ -12,7 +12,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1.5rem;
-    
+    /* Ajuste para telas muito pequenas, garantindo um padding mínimo */
+    box-sizing: border-box; /* Garante que padding não adicione largura */
 }
 
 /* Cabeçalho */
@@ -24,30 +25,38 @@ header {
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Padrão para mobile: itens empilhados */
     align-items: center;
     justify-content: space-between;
+    text-align: center; /* Centraliza o texto no cabeçalho para mobile */
 }
 
 header .container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Padrão para mobile: itens empilhados */
     align-items: center;
     width: 100%;
 }
 
 header h1 {
-    font-size: 2.25rem; /* text-3xl */
+    font-size: 1.75rem; /* Ajustado para telas menores */
     font-weight: 700; /* font-bold */
     margin-bottom: 1rem;
+    word-break: break-word; /* Evita quebra de palavras longas em telas muito pequenas */
 }
 
 header nav ul {
     display: flex;
+    flex-direction: column; /* Itens da navegação empilhados em mobile */
     list-style: none;
     padding: 0;
     margin: 0;
-    gap: 1.5rem; /* space-x-6 */
+    gap: 0.75rem; /* Espaçamento menor entre os itens para mobile */
+    width: 100%; /* Ocupa a largura total para alinhar */
+}
+
+header nav li {
+    width: 100%; /* Garante que cada item ocupe a linha inteira */
 }
 
 header nav a {
@@ -55,6 +64,8 @@ header nav a {
     text-decoration: none;
     font-weight: 600; /* font-semibold */
     transition: color 0.3s ease;
+    display: block; /* Ocupa todo o espaço do li */
+    padding: 0.5rem 0; /* Adiciona padding para facilitar o clique */
 }
 
 header nav a:hover {
@@ -64,7 +75,7 @@ header nav a:hover {
 /* Seção de Herói */
 .hero-section {
     background-color: #f9fafb; /* Mantido claro para contraste */
-    padding: 5rem 1.5rem; /* py-20 px-6 */
+    padding: 3rem 1rem; /* Reduzido para mobile */
     text-align: center;
     border-radius: 0.5rem; /* rounded-lg */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
@@ -72,19 +83,21 @@ header nav a:hover {
 }
 
 .hero-section h2 {
-    font-size: 3rem; /* text-5xl */
+    font-size: 2rem; /* Ajustado para telas menores */
     font-weight: 800; /* font-extrabold */
     color: #00BD9E; /* Teal vibrante da logo */
-    margin-bottom: 1.5rem; /* mb-6 */
+    margin-bottom: 1rem; /* mb-6 */
+    line-height: 1.2; /* Melhora a legibilidade em várias linhas */
 }
 
 .hero-section p {
-    font-size: 1.25rem; /* text-xl */
+    font-size: 1rem; /* Ajustado para telas menores */
     color: #4b5563; /* text-gray-700 */
-    margin-bottom: 2rem; /* mb-8 */
+    margin-bottom: 1.5rem; /* mb-8 */
     max-width: 48rem; /* max-w-3xl */
     margin-left: auto;
     margin-right: auto;
+    word-break: break-word; /* Evita quebras inesperadas */
 }
 
 .hero-section .button {
@@ -92,11 +105,12 @@ header nav a:hover {
     background-color: #00BD9E; /* Teal vibrante da logo */
     color: white;
     font-weight: 700; /* font-bold */
-    padding: 0.75rem 2rem; /* py-3 px-8 */
+    padding: 0.6rem 1.5rem; /* Reduzido para mobile */
     border-radius: 9999px; /* rounded-full */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-lg */
     text-decoration: none;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 0.9rem; /* Ajustado para mobile */
 }
 
 .hero-section .button:hover {
@@ -107,109 +121,110 @@ header nav a:hover {
 /* Seções de Conteúdo Principal */
 main {
     padding: 0 1rem; /* px-4 */
-    margin-top: 2rem; /* my-8 */
-    margin-bottom: 2rem;
+    margin-top: 1.5rem; /* my-8 */
+    margin-bottom: 1.5rem;
 }
 
 main section {
     background-color: white;
-    padding: 2rem; /* p-8 */
+    padding: 1.5rem; /* Reduzido para mobile */
     border-radius: 0.5rem; /* rounded-lg */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
-    margin-bottom: 2rem; /* mb-8 */
+    margin-bottom: 1.5rem; /* mb-8 */
 }
 
 main section h3 {
-    font-size: 2.25rem; /* text-4xl */
+    font-size: 1.75rem; /* Ajustado para mobile */
     font-weight: 700; /* font-bold */
     color: #00BD9E; /* Teal vibrante da logo */
-    margin-bottom: 1.5rem; /* mb-6 */
+    margin-bottom: 1rem; /* mb-6 */
     text-align: center;
 }
 
 main section p {
-    font-size: 1.125rem; /* text-lg */
-    line-height: 1.75; /* leading-relaxed */
-    margin-bottom: 1.5rem; /* mb-6 */
+    font-size: 1rem; /* Ajustado para mobile */
+    line-height: 1.6; /* leading-relaxed */
+    margin-bottom: 1rem; /* mb-6 */
 }
 
 /* Grid de Cartões */
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr; /* Padrão para mobile */
-    gap: 2rem; /* gap-8 */
+    grid-template-columns: 1fr; /* Padrão para mobile: 1 coluna */
+    gap: 1.5rem; /* Reduzido para mobile */
 }
 
 /* Cartões de Conteúdo */
 .card {
-    padding: 1.5rem; /* p-6 */
+    padding: 1.25rem; /* Reduzido para mobile */
     border-radius: 0.5rem; /* rounded-lg */
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* shadow-sm */
     border: 1px solid;
 }
 
-/* Cores dos Cartões */
-.card.blue-theme { /* Renomeado para "Conceitos - Tema Verde Primário" */
-    background-color: #ECFDF5; /* Verde bem claro */
-    border-color: #A7F3D0; /* Verde claro */
+/* Cores dos Cartões (mantidas) */
+.card.blue-theme {
+    background-color: #ECFDF5;
+    border-color: #A7F3D0;
 }
 
-.card.red-theme { /* Renomeado para "Segurança - Tema Verde Secundário" */
-    background-color: #E0F2F1; /* Verde/teal pálido */
-    border-color: #80CBC4; /* Teal médio */
+.card.red-theme {
+    background-color: #E0F2F1;
+    border-color: #80CBC4;
 }
 
-.card.green-theme { /* Renomeado para "Futuro - Tema Verde Terciário" */
-    background-color: #B2DFDB; /* Teal pálido */
-    border-color: #80CBC4; /* Teal médio */
+.card.green-theme {
+    background-color: #B2DFDB;
+    border-color: #80CBC4;
 }
 
 .card h4 {
-    font-size: 1.5rem; /* text-2xl */
+    font-size: 1.25rem; /* Ajustado para mobile */
     font-weight: 600; /* font-semibold */
-    margin-bottom: 0.75rem; /* mb-3 */
+    margin-bottom: 0.5rem; /* mb-3 */
 }
 
 .card.blue-theme h4,
 .card.green-theme h4 {
-    color: #00BD9E; /* Teal vibrante da logo */
+    color: #00BD9E;
 }
 
 .card.red-theme h4 {
-    color: #008C78; /* Teal escuro da logo */
+    color: #008C78;
 }
 
 .card p {
-    color: #4b5563; /* text-gray-700 */
-    font-size: 1rem; /* Ajustado para o texto do cartão */
-    margin-bottom: 0; /* Remove a margem padrão do parágrafo */
+    color: #4b5563;
+    font-size: 0.95rem; /* Ajustado para o texto do cartão em mobile */
+    margin-bottom: 0;
 }
 
 .card ul {
     list-style: disc;
-    padding-left: 1.25rem; /* pl-5 */
-    margin-top: 0.5rem; /* mt-2 */
+    padding-left: 1rem; /* Reduzido para mobile */
+    margin-top: 0.5rem;
 }
 
 .card strong {
     font-weight: 700;
-    color: #008C78; /* Teal escuro da logo para destaque */
+    color: #008C78;
 }
 
 .card img {
     width: 100%;
-    margin-top: 1rem; /* mt-4 */
-    border-radius: 0.375rem; /* rounded-md */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* shadow-sm */
-    height: auto; /* Garante que as imagens escalem de forma responsiva */
+    margin-top: 0.75rem; /* Reduzido para mobile */
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    height: auto;
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
 }
 
 /* Rodapé */
 footer {
-    background-color: #1A2B2D; /* Cor de fundo escura da logo */
+    background-color: #1A2B2D;
     color: white;
-    padding: 1.5rem 1.5rem; /* py-6 px-6 */
-    margin-top: 2rem; /* mt-8 */
+    padding: 1rem 1.5rem; /* Reduzido para mobile */
+    margin-top: 1.5rem; /* mt-8 */
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
     text-align: center;
@@ -217,121 +232,295 @@ footer {
 
 footer .social-links {
     display: flex;
+    flex-direction: column; /* Empilha links sociais em mobile */
     justify-content: center;
-    gap: 1.5rem; /* space-x-6 */
-    margin-top: 1rem; /* mt-4 */
+    gap: 0.75rem; /* space-x-6 */
+    margin-top: 0.75rem; /* mt-4 */
 }
 
 footer .social-links a {
     color: white;
     text-decoration: none;
     transition: color 0.3s ease;
+    display: block; /* Garante que o link ocupe a linha */
 }
 
 footer .social-links a:hover {
-    color: #4ECDC4; /* Teal mais claro para o hover */
+    color: #4ECDC4;
 }
 
-/* Formulario contato */
+/* Formulário de Contato */
 .contact-form {
-            background-color: #ffffff;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 2rem auto; /* Centraliza o formulário e adiciona margem */
-        }
+    background-color: #ffffff;
+    padding: 1.5rem; /* Reduzido para mobile */
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 1.5rem auto; /* Centraliza o formulário e adiciona margem */
+}
 
-        .contact-form h3 {
-            font-size: 2rem;
-            color: #1A2B2D;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
+.contact-form h3 {
+    font-size: 1.75rem; /* Ajustado para mobile */
+    color: #1A2B2D;
+    margin-bottom: 1rem;
+    text-align: center;
+}
 
-        .form-group {
-            margin-bottom: 1rem;
-        }
+.contact-form p {
+    font-size: 0.9rem; /* Ajustado para mobile */
+    margin-bottom: 1rem;
+}
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #333;
-        }
+.form-group {
+    margin-bottom: 0.75rem; /* Reduzido para mobile */
+}
 
-        .form-group input[type="text"],
-        .form-group input[type="email"],
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ccc;
-            border-radius: 0.3rem;
-            box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
-            font-size: 1rem;
-            font-family: 'Inter', sans-serif; /* Consistência de fonte */
-        }
+.form-group label {
+    display: block;
+    margin-bottom: 0.4rem; /* Reduzido para mobile */
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem; /* Ajustado para mobile */
+}
 
-        .form-group textarea {
-            resize: vertical; /* Permite redimensionar verticalmente */
-            min-height: 100px;
-        }
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 0.7rem; /* Reduzido para mobile */
+    border: 1px solid #ccc;
+    border-radius: 0.3rem;
+    box-sizing: border-box;
+    font-size: 0.95rem; /* Ajustado para mobile */
+    font-family: 'Inter', sans-serif;
+}
 
-        .contact-form .submit-button {
-            display: block;
-            width: 100%;
-            background-color: #00BD9E; /* Cor vibrante da logo */
-            color: white;
-            font-weight: 700;
-            padding: 1rem;
-            border: none;
-            border-radius: 0.3rem;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px; /* Reduzido para mobile */
+}
 
-        .contact-form .submit-button:hover {
-            background-color: #008C78; /* Teal escuro da logo para o hover */
-            transform: scale(1.02);
-        }
+.contact-form .submit-button {
+    display: block;
+    width: 100%;
+    background-color: #00BD9E;
+    color: white;
+    font-weight: 700;
+    padding: 0.8rem; /* Reduzido para mobile */
+    border: none;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    font-size: 1rem; /* Ajustado para mobile */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.contact-form .submit-button:hover {
+    background-color: #008C78;
+    transform: scale(1.02);
+}
+
 
 /* Media Queries para Responsividade */
-@media (min-width: 768px) {
+
+/* Pequenas telas (até 576px) - Ajustes específicos para garantir legibilidade */
+@media (max-width: 576px) {
+    .container {
+        padding: 0 0.75rem; /* Menor padding para telas muito estreitas */
+    }
+
+    header h1 {
+        font-size: 1.5rem; /* Ajuste para títulos ainda menores */
+    }
+
+    .hero-section h2 {
+        font-size: 1.75rem;
+    }
+
+    .hero-section p {
+        font-size: 0.9rem;
+    }
+
+    .hero-section .button {
+        padding: 0.5rem 1.2rem;
+        font-size: 0.8rem;
+    }
+
+    main section h3 {
+        font-size: 1.5rem;
+    }
+
+    .card h4 {
+        font-size: 1.1rem;
+    }
+
+    .card p {
+        font-size: 0.85rem;
+    }
+
+    .contact-form h3 {
+        font-size: 1.5rem;
+    }
+
+    .form-group label {
+        font-size: 0.85rem;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group textarea {
+        font-size: 0.85rem;
+        padding: 0.6rem;
+    }
+
+    .contact-form .submit-button {
+        font-size: 0.9rem;
+        padding: 0.7rem;
+    }
+}
+
+
+@media (min-width: 768px) { /* Tablets e desktops */
     header {
         flex-direction: row;
     }
 
     header .container {
         flex-direction: row;
-        justify-content: space-between; /* Corrigido para espaçar h1 e nav */
-        align-items: center; /* Alinha verticalmente */
+        justify-content: space-between;
+        align-items: center;
     }
 
     header h1 {
+        font-size: 2.25rem; /* text-3xl */
         margin-bottom: 0;
     }
 
     header nav ul {
+        flex-direction: row; /* Volta para linha em telas maiores */
         gap: 1.5rem;
+        width: auto; /* Deixa a largura automática */
+    }
+
+    header nav li {
+        width: auto;
+    }
+
+    .hero-section {
+        padding: 5rem 1.5rem;
+    }
+
+    .hero-section h2 {
+        font-size: 3rem;
+    }
+
+    .hero-section p {
+        font-size: 1.25rem;
+    }
+
+    .hero-section .button {
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
     }
 
     main {
-        padding: 0 1rem;
+        padding: 0 1.5rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    main section {
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    main section h3 {
+        font-size: 2.25rem;
+        margin-bottom: 1.5rem;
+    }
+
+    main section p {
+        font-size: 1.125rem;
+        margin-bottom: 1.5rem;
     }
 
     .grid-container {
         grid-template-columns: repeat(2, 1fr); /* md:grid-cols-2 */
+        gap: 2rem;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
+
+    .card h4 {
+        font-size: 1.5rem;
+    }
+
+    .card p {
+        font-size: 1rem;
+    }
+
+    .card ul {
+        padding-left: 1.25rem;
+    }
+
+    .contact-form {
+        padding: 2rem;
+        margin: 2rem auto;
+    }
+
+    .contact-form h3 {
+        font-size: 2rem;
+    }
+
+    .contact-form p {
+        font-size: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group label {
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group textarea {
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+
+    .form-group textarea {
+        min-height: 100px;
+    }
+
+    .contact-form .submit-button {
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+
+    footer {
+        padding: 1.5rem 1.5rem;
+        margin-top: 2rem;
+    }
+
+    footer .social-links {
+        flex-direction: row; /* Volta para linha em telas maiores */
+        gap: 1.5rem;
+        margin-top: 1rem;
     }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1024px) { /* Telas maiores */
     .grid-container.lg-cols-3 { /* Para as seções que precisam de 3 colunas em telas grandes */
         grid-template-columns: repeat(3, 1fr); /* lg:grid-cols-3 */
     }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1200px) { /* Desktops muito grandes */
     .container {
         padding: 0;
     }
