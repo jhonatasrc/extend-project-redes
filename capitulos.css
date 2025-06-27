@@ -1,184 +1,383 @@
+/* Estilos para Seções de Capítulo (mantidos como na última versão responsiva) */
 .chapter-section {
-            background-color: #ffffff;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-        }
+    background-color: #ffffff;
+    padding: 1.25rem; /* Reduzido para mobile */
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem; /* Reduzido para mobile */
+}
 
-        .chapter-section h3 {
-            font-size: 2rem;
-            color: #1A2B2D; /* Cor escura da logo */
-            margin-bottom: 1rem;
-        }
+.chapter-section h2 {
+    font-size: 2rem; /* Ajustado para mobile */
+    color: #00BD9E;
+    margin-bottom: 1rem;
+    text-align: center;
+    line-height: 1.2;
+}
 
-        .chapter-section h4 {
-            font-size: 1.5rem;
-            color: #00BD9E; /* Cor vibrante da logo */
-            margin-bottom: 0.75rem;
-        }
+.chapter-section h3 {
+    font-size: 1.5rem; /* Ajustado para mobile */
+    color: #1A2B2D;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+}
 
-        .chapter-section p, .chapter-section ul, .chapter-section ol {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #4b5563;
-            margin-bottom: 1rem;
-        }
+.chapter-section h4 {
+    font-size: 1.25rem; /* Ajustado para mobile */
+    color: #00BD9E;
+    margin-bottom: 0.6rem;
+}
 
-        .chapter-section ul, .chapter-section ol {
-            padding-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
+.chapter-section p,
+.chapter-section ul,
+.chapter-section ol {
+    font-size: 0.95rem; /* Ajustado para mobile */
+    line-height: 1.6;
+    color: #4b5563;
+    margin-bottom: 0.8rem;
+    word-break: break-word;
+}
 
-        .chapter-section img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 0.5rem;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: none; /* Imagens removidas conforme solicitado */
-        }
+.chapter-section ul,
+.chapter-section ol {
+    padding-left: 1.2rem;
+    margin-bottom: 0.8rem;
+}
 
-        .back-button {
-            display: inline-block;
-            background-color: #1A2B2D; /* Cor escura da logo */
-            color: white;
-            font-weight: 600;
-            padding: 0.75rem 1.5rem;
-            border-radius: 9999px; /* rounded-full */
-            text-decoration: none;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            /* Removido margin-top e margin-bottom daqui para o container de navegação */
-        }
+.chapter-section li {
+    margin-bottom: 0.4rem;
+}
 
-        .back-button:hover {
-            background-color: #008C78; /* Teal escuro da logo para o hover */
-            transform: scale(1.05);
-        }
+.chapter-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* display: none; */
+}
 
-        /* Estilos para as atividades de múltipla escolha */
-        .question-block {
-            background-color: #f0f8ff; /* Light blue background for questions */
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid #add8e6;
-        }
+/* Botões de Navegação do Capítulo - REVISADOS */
+.chapter-navigation-buttons {
+    display: flex;
+    flex-direction: column; /* Continua empilhando em mobile */
+    align-items: center; /* Centraliza os itens horizontalmente */
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    width: 100%; /* Garante que o container ocupe a largura para centralizar */
+}
 
-        .question-block p {
-            font-weight: 600;
-            color: #1A2B2D;
-            margin-bottom: 1rem;
-        }
+.back-button {
+    display: inline-block; /* Mantém o display original para o visual */
+    background-color: #1A2B2D;
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem; /* Mantido o padding original, que já era bom */
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-align: center; /* Garante que o texto seja centralizado dentro do botão */
+    font-size: 1rem; /* Mantido o tamanho original */
+    /* Removido o 'width: 90%;' e 'max-width' daqui.
+       A centralização será feita pelo flexbox do pai. */
+}
 
-        .question-block label {
-            display: block;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            color: #333;
-        }
+.back-button:hover {
+    background-color: #008C78;
+    transform: scale(1.05);
+}
 
-        .question-block input[type="radio"] {
-            margin-right: 0.5rem;
-        }
+/* Estilos para as atividades de múltipla escolha (mantidos como na última versão responsiva) */
+.question-block {
+    background-color: #f0f8ff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #add8e6;
+}
 
-        .question-block .check-button {
-            background-color: #00BD9E;
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border: none;
-            border-radius: 0.3rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 1rem;
-        }
+.question-block p {
+    font-weight: 600;
+    color: #1A2B2D;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+}
 
-        .question-block .check-button:hover {
-            background-color: #008C78;
-        }
+.question-block label {
+    display: block;
+    margin-bottom: 0.4rem;
+    cursor: pointer;
+    color: #333;
+    font-size: 0.9rem;
+}
 
-        .question-block .feedback {
-            margin-top: 1rem;
-            font-weight: 600;
-        }
+.question-block input[type="radio"] {
+    margin-right: 0.4rem;
+}
 
-        .question-block .feedback.correct {
-            color: #059669; /* Green for correct */
-        }
+.question-block .check-button {
+    background-color: #00BD9E;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+}
 
-        .question-block .feedback.incorrect {
-            color: #dc2626; /* Red for incorrect */
-        }
+.question-block .check-button:hover {
+    background-color: #008C78;
+}
 
-        /* Novo estilo para o container dos botões de navegação */
-        .chapter-navigation-buttons {
-            display: flex;
-            justify-content: center; /* Centraliza os itens horizontalmente */
-            gap: 1rem; /* Espaço entre os botões */
-            margin-top: 2rem; /* Margem superior para separar do conteúdo */
-            margin-bottom: 2rem; /* Margem inferior para separar do rodapé */
-        }
+.question-block .feedback {
+    margin-top: 0.8rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
 
-        /* Estilos para o indicador de progresso */
-        .chapter-progress {
-            text-align: center;
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-            background-color: #fff; /* White background for the section */
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
+.question-block .feedback.correct {
+    color: #059669;
+}
 
-        .chapter-progress h3 {
-            font-size: 1.75rem; /* Slightly smaller heading for this section */
-            color: #1A2B2D;
-            margin-bottom: 1rem;
-        }
+.question-block .feedback.incorrect {
+    color: #dc2626;
+}
 
-        .progress-indicator {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem; /* Espaço entre os pontos */
-            margin-bottom: 1rem;
-            flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
-        }
+/* Estilos para o indicador de progresso (mantidos como na última versão responsiva) */
+.chapter-progress {
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    background-color: #fff;
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
 
-        .chapter-dot {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 2.5rem; /* Tamanho do ponto */
-            height: 2.5rem;
-            border-radius: 50%; /* Torna-o redondo */
-            background-color: #e0e0e0; /* Cor padrão para não concluído */
-            color: #555;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: 2px solid transparent; /* Borda padrão */
-            flex-shrink: 0; /* Impede que os pontos encolham */
-        }
+.chapter-progress h3 {
+    font-size: 1.5rem;
+    color: #1A2B2D;
+    margin-bottom: 0.8rem;
+}
 
-        .chapter-dot:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 8px rgba(0, 189, 158, 0.4);
-        }
+.progress-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-bottom: 0.8rem;
+    flex-wrap: wrap;
+}
 
-        .chapter-dot.completed {
-            background-color: #00BD9E; /* Cor de concluído - Teal vibrante da logo */
-            color: white;
-        }
+.chapter-dot {
+    display: flex; /* Garante que o texto fique centralizado */
+    align-items: center;
+    justify-content: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    border-radius: 50%; /* Torna-o redondo */
+    background-color: #e0e0e0; /* Cor padrão para não concluído */
+    color: #555;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid transparent; /* Borda padrão */
+}
 
-        .chapter-dot.current-chapter {
-            border: 2px solid #1A2B2D; /* Borda escura para o capítulo atual */
-            transform: scale(1.05); /* Ligeiramente maior para enfatizar */
-            box-shadow: 0 0 10px rgba(0, 189, 158, 0.6);
-        }
+.chapter-dot:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 8px rgba(0, 189, 158, 0.4);
+}
 
-        .chapter-progress p {
-            font-size: 1.1rem;
-            color: #333;
-            margin-top: 1rem;
-        }
+.chapter-dot.completed {
+    background-color: #00BD9E;
+    color: white;
+}
+
+.chapter-dot.current-chapter {
+    border: 2px solid #1A2B2D;
+    transform: scale(1.08);
+    box-shadow: 0 0 10px rgba(0, 189, 158, 0.6);
+}
+
+.chapter-progress p {
+    font-size: 0.9rem;
+    color: #333;
+    margin-top: 0.8rem;
+}
+
+
+/* Media Queries para Responsividade */
+
+/* Pequenas telas (até 576px) - Ajustes finais para garantir legibilidade máxima */
+@media (max-width: 576px) {
+    /* O container já é tratado no style.css global */
+
+    .chapter-section h2 {
+        font-size: 1.7rem;
+    }
+
+    .chapter-section h3 {
+        font-size: 1.35rem;
+    }
+
+    .chapter-section h4 {
+        font-size: 1.1rem;
+    }
+
+    .chapter-section p,
+    .chapter-section ul,
+    .chapter-section ol {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .chapter-section ul,
+    .chapter-section ol {
+        padding-left: 1rem;
+    }
+
+    /* Os botões .back-button agora mantêm seu estilo inline-block e são centralizados pelo flex container */
+    .back-button {
+        font-size: 0.9rem; /* Leve ajuste para ser responsivo */
+        padding: 0.6rem 1.2rem;
+    }
+
+    .question-block {
+        padding: 0.8rem;
+    }
+
+    .question-block p {
+        font-size: 0.9rem;
+    }
+
+    .question-block label {
+        font-size: 0.85rem;
+    }
+
+    .question-block .check-button {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.8rem;
+    }
+
+    .chapter-progress h3 {
+        font-size: 1.3rem;
+    }
+
+    .chapter-dot {
+        width: 2rem;
+        height: 2rem;
+        font-size: 0.85rem;
+    }
+
+    .chapter-progress p {
+        font-size: 0.85rem;
+    }
+}
+
+
+/* Tablets e desktops (a partir de 768px) - Restaurando tamanhos maiores */
+@media (min-width: 768px) {
+    .chapter-section {
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .chapter-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .chapter-section h3 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .chapter-section h4 {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .chapter-section p,
+    .chapter-section ul,
+    .chapter-section ol {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .chapter-section ul,
+    .chapter-section ol {
+        padding-left: 1.5rem;
+    }
+
+    .chapter-navigation-buttons {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .back-button {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .question-block {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .question-block p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .question-block label {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .question-block input[type="radio"] {
+        margin-right: 0.5rem;
+    }
+
+    .question-block .check-button {
+        padding: 0.6rem 1.2rem;
+        margin-top: 1rem;
+        font-size: 1rem;
+    }
+
+    .chapter-progress {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+    }
+
+    .chapter-progress h3 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .progress-indicator {
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .chapter-dot {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1rem;
+    }
+
+    .chapter-progress p {
+        font-size: 1.1rem;
+        margin-top: 1rem;
+    }
+}
